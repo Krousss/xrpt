@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../resource/js/jquery-3.4.1.min.js"></script>
+		<link rel="stylesheet" href="../../resource/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../resource/css/main/header.css" />
+		<link rel="stylesheet" href="../../resource/css/main/footer.css" />
+		<link rel="stylesheet" type="text/css" href="../../resource/css/main/poster/orderDetail.css" />
+		<script type="text/javascript" src="../../resource/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<!--
+        	作者：offline
+        	时间：2020-07-11
+        	描述：顶部栏
+        -->
+		<div class="page_top">
+			<a href="../../index.html"><img src="../../resource/img/logo.png" /></a>
+			<div class="dropdown" id="logAndReg_div">
+				<h4 class="btn btn-default btn-lg dropdown-toggle" id="user_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    				欢迎：XXXXXXXXXXXXX
+   				 <span class="caret"></span>
+  				</h4>
+				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="user_menu">
+					<li>
+						<a href="../User/UserCenter.html">个人中心</a>
+					</li>
+					<li>
+						<a href="../../index.html">返回首页</a>
+					</li>
+					<li>
+						<a href="#">退出登录</a>
+					</li>
+					<li role="separator" class="divider"></li>
+					<li>
+						<a href="#">用户须知与服务协议</a>
+					</li>
+				</ul>
+			</div>
+
+			<!--
+            	作者：offline
+            	时间：2020-07-12
+            	描述：订单详情
+            -->
+			<div class="main_panel">
+				<div class="order_table">
+					<table class="table">
+						<!-- On rows -->
+						<tr class="active">
+							<td>订单编号</td>
+							<td>123456</td>
+							<td>
+								<a>取消订单</a>
+							</td>
+
+						</tr>
+						<tr class="success">
+							<td>收货人</td>
+							<td>真步</td>
+							<td>
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeName">修改</button>
+							</td>
+
+						</tr>
+						<tr class="warning">
+							<td>驿站位置</td>
+							<td>食堂对面菜鸟驿站</td>
+							<td>
+								<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeLocation">修改</button>
+							</td>
+
+						</tr>
+						<tr class="danger">
+							<td>交货地址</td>
+							<td>E1-427</td>
+							<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeAddress">修改</button></td>
+
+						</tr>
+						<tr class="info">
+							<td>联系电话</td>
+							<td>12345678910</td>
+							<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changePhone">修改</button></td>
+
+						</tr>
+						<tr class="active">
+							<td>最晚送达时间</td>
+							<td>2020-06-12 18:00:00</td>
+							<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeDDL">修改</button></td>
+
+						</tr>
+						<tr class="success">
+							<td>取件码</td>
+							<td>123456</td>
+							<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeCode">修改</button></td>
+
+						</tr>
+					</table>
+					<!--
+                	作者：offline
+                	时间：2020-07-12
+                	描述：收货人修改模态框
+                -->
+					<div class="modal fade" id="changeName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">修改收货人</h4>
+								</div>
+								<form action="" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="name">收货人</label>
+											<input type="text" class="form-control" id="name" placeholder="收货人昵称">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<button type="submit" class="btn btn-primary">保存</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!--
+                    	作者：offline
+                    	时间：2020-07-12
+                    	描述：修改驿站位置模态框
+                    -->
+					<div class="modal fade" id="changeLocation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">修改驿站位置</h4>
+								</div>
+								<form action="" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="location">驿站位置</label>
+											<select class="form-control">
+												<option>厦软后门菜鸟驿站</option>
+												<option>食堂对面菜鸟驿站</option>
+											</select>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<button type="submit" class="btn btn-primary">保存</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!--
+                    	作者：offline
+                    	时间：2020-07-12
+                    	描述：修改交货地址模态框
+                    -->
+                    <div class="modal fade" id="changeAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">修改交货地址</h4>
+								</div>
+								<form action="" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="address">交货地址</label>
+											<input type="text" class="form-control" id="address" placeholder="交货地址">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<button type="submit" class="btn btn-primary">保存</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+                    <!--
+                    	作者：offline
+                    	时间：2020-07-12
+                    	描述：修改联系电话模态框
+                    -->
+                    <div class="modal fade" id="changePhone" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">修改联系电话</h4>
+								</div>
+								<form action="" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="phone">联系电话</label>
+											<input type="tel" class="form-control" id="phone" placeholder="11位数字">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<button type="submit" class="btn btn-primary">保存</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+                    <!--
+                    	作者：offline
+                    	时间：2020-07-12
+                    	描述：修改送达时间模态框
+                    -->
+                    <div class="modal fade" id="changeDDL" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">修改送达时间</h4>
+								</div>
+								<form action="" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="DDL">送达时间</label>
+											<input type="datetime-local" class="form-control" id="DDL" placeholder="送达时间">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<button type="submit" class="btn btn-primary">保存</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+                    <!--
+                    	作者：offline
+                    	时间：2020-07-12
+                    	描述：修改取件码模态框
+                    -->
+                    <div class="modal fade" id="changeCode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog modal-sm" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">修改取件码</h4>
+								</div>
+								<form action="" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="code">取件码</label>
+											<input type="text" class="form-control" id="code" placeholder="取件码">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<button type="submit" class="btn btn-primary">保存</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+			</div>
+	</body>
+
+</html>

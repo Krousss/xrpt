@@ -1,0 +1,58 @@
+#nav_tabs{
+	margin-top: 40px;
+	margin-left: 40px;
+	margin-right: 40px;
+	font-size: 24px;
+}
+.your_table{
+	float: left;
+	padding: 10px 10px;
+	
+}
+.your_table table tr:first-child{
+	
+	height: 170px;
+}
+.your_table table{
+	
+	width: 270px;
+	height: 270px;
+	border-radius: 3px;
+	padding: 3px;
+	box-shadow: 0px 0px 5px #000;
+	text-align: center;
+	font-size: 16px;
+	
+}
+.goods_img{
+	
+}
+.tab-content{
+	margin-left: 30px;
+}
+.add_btn{
+	width: 285px;
+	height: 345px;
+	border-radius: 3px;
+	padding: 3px;
+	box-shadow: 0px 0px 5px #000;
+	line-height: 300px;
+	text-align: center;
+	background-color: #58b2dc;
+	font-size: 64px;
+	color: white;
+
+}
+.poster_table{
+	
+	margin-right: 40px;
+}
+.order_selector{
+	width:40%;
+	display: inline-block;
+	padding-right: 50px;
+}
+.pagehelper{
+	margin: 0 auto;
+	text-align: center;
+}

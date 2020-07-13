@@ -1,0 +1,25 @@
+#nav_tabs{
+	margin-top: 40px;
+	margin-left: 40px;
+	margin-right: 40px;
+	font-size: 24px;
+}
+.tab-content{
+	margin-left: 30px;
+}
+#score{
+	color: red;
+}
+#score_sub{
+	color: red;
+	font-size: 16px;
+}
+#score_add{
+	font-size: 16px;
+}
+.produce{
+	font-size: 24px;
+}
+#info_tab{
+	margin-right: 30px;
+}

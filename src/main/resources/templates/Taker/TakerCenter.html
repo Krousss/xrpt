@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../resource/js/jquery-3.4.1.min.js"></script>
+		<link rel="stylesheet" href="../../resource/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../resource/css/main/header.css" />
+		<link rel="stylesheet" href="../../resource/css/main/footer.css" />
+		<link rel="stylesheet" href="../../resource/css/main/taker/taker.css" />
+		<script type="text/javascript" src="../../resource/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<!--
+        	作者：offline
+        	时间：2020-07-11
+        	描述：顶部栏
+        -->
+		<div class="page_top">
+			<a href="../../index.html"><img src="../../resource/img/logo.png" /></a>
+			<div class="dropdown" id="logAndReg_div">
+				<h4 class="btn btn-default btn-lg dropdown-toggle" id="user_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    				欢迎：XXXXXXXXXXXXX
+   				 <span class="caret"></span>
+  				</h4>
+				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="user_menu">
+					<li>
+						<a href="../User/UserCenter.html">个人中心</a>
+					</li>
+					<li>
+						<a href="../../index.html">返回首页</a>
+					</li>
+					<li>
+						<a href="#">退出登录</a>
+					</li>
+					<li role="separator" class="divider"></li>
+					<li>
+						<a href="#">用户须知与服务协议</a>
+					</li>
+				</ul>
+			</div>
+			<!--
+                	作者：offline
+                	时间：2020-07-11
+                	描述：标签页
+                -->
+			<div class="main_panel">
+
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist" id="nav_tabs">
+					<li role="presentation" class="active">
+						<a href="#waiting" aria-controls="waiting" role="tab" data-toggle="tab">待接订单区</a>
+					</li>
+					<li role="presentation">
+						<a href="#token" aria-controls="token" role="tab" data-toggle="tab">接到的订单</a>
+					</li>
+					<li role="presentation">
+						<a href="#finished" aria-controls="finished" role="tab" data-toggle="tab">已完成的订单</a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="waiting">
+						<!--
+                    	作者：offline
+                    	时间：2020-07-11
+                    	描述：第一页
+                    -->
+                    <hr />
+                    <!--
+                    	作者：offline
+                    	时间：2020-07-12
+                    	描述：搜索栏
+                    -->
+						<div class="order_selector">
+							<form class="form-inline">
+								<div class="form-group">
+									<label for="location">驿站位置</label>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+												<select class="form-control" id="location">
+													<option>食堂对面菜鸟驿站</option>
+													<option>厦软后门菜鸟驿站</option>
+												</select>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default">筛选</button>
+								</div>
+							</form>
+						</div>
+						<div class="order_selector">
+							<form class="form-inline">
+								<div class="form-group">
+									<label for="time">日期区间</label>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									<input type="datetime-local" class="form-control" id="minTime" placeholder="时间区间">到
+									<input type="datetime-local" class="form-control" id="maxTime" placeholder="时间区间">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default">筛选</button>
+								</div>
+							</form>
+						</div>
+						<div class="order_selector">
+							<form class="form-inline">
+								<div class="form-group">
+									<label for="address">交货地址</label>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									<input type="text" class="form-control" id="address" placeholder="交货地址">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default">筛选</button>
+								</div>
+							</form>
+						</div>
+						<hr />
+                    <div class="your_table">
+							<a href="orderDetail.html">
+								<table border="0px" cellspacing="" cellpadding="" class="table">
+									<!-- On rows -->
+									<tr>
+										<td colspan="2" class="goods_img">
+											<img src="../../resource/img/goods.png" />
+										</td>
+									</tr>
+									<tr class="success">
+										<td>发布者：</td>
+										<td>真步</td>
+									</tr>
+									<tr class="warning">
+										<td>驿站位置：</td>
+										<td>厦软后门菜鸟驿站</td>
+
+									</tr>
+									<tr class="danger">
+										<td>交货地址：</td>
+										<td>学生宿舍E1-427</td>
+
+									</tr>
+									<tr class="success">
+										<td>交货时间：</td>
+										<td>2020-06-22 18:00:00</td>
+									</tr>
+
+								</table>
+							</a>
+						</div>
+						
+						<div class="your_table">
+							<a href="orderDetail.html">
+								<table border="0px" cellspacing="" cellpadding="" class="table">
+									<!-- On rows -->
+									<tr>
+										<td colspan="2" class="goods_img">
+											<img src="../../resource/img/goods.png" />
+										</td>
+									</tr>
+									<tr class="success">
+										<td>发布者：</td>
+										<td>真步</td>
+									</tr>
+									<tr class="warning">
+										<td>驿站位置：</td>
+										<td>厦软后门菜鸟驿站</td>
+
+									</tr>
+									<tr class="danger">
+										<td>交货地址：</td>
+										<td>学生宿舍E1-427</td>
+
+									</tr>
+									<tr class="success">
+										<td>交货时间：</td>
+										<td>2020-06-22 18:00:00</td>
+									</tr>
+
+								</table>
+							</a>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="token">
+						<!--
+                        	作者：offline
+                        	时间：2020-07-12
+                        	描述：第二页
+                        -->
+                        <div class="your_table">
+
+							<table border="0px" cellspacing="" cellpadding="" class="table">
+								<!-- On rows -->
+								<tr>
+									<td colspan="2" class="goods_img">
+										<img src="../../resource/img/goods.png" />
+									</td>
+								</tr>
+								<tr class="success">
+									<td>收货人：</td>
+									<td>真步</td>
+								</tr>
+								<tr class="warning">
+									<td>联系方式：</td>
+									<td>12345678910</td>
+
+								</tr>
+								<tr class="danger">
+									<td>交货地址：</td>
+									<td>学生宿舍E1-427</td>
+
+								</tr>
+								<tr class="info">
+									<td>取件码：</td>
+									<td>
+										D2-0322
+									</td>
+
+								</tr>
+								<tr class="success">
+									<td>交货时间：</td>
+									<td>2020-06-22 18:00:00</td>
+								</tr>
+								<tr class="warning">
+									<td>剩余时间：</td>
+									<td>00:14:39</td>
+
+								</tr>
+								<tr class="info">
+									<td>操作：</td>
+									<td>
+										<a href="">取消接单</a>&emsp;/&emsp;
+										<a href="">确认收货</a>
+									</td>
+
+								</tr>
+							</table>
+
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="finished">
+						<!--
+                        	作者：offline
+                        	时间：2020-07-12
+                        	描述：第三页
+                        -->
+                        <hr />
+						<div class="order_selector">
+							<form class="form-inline">
+								<div class="form-group">
+									<label for="takerName">收货人</label>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									<input type="text" class="form-control" id="takerName" placeholder="按收货人查询">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default">筛选</button>
+								</div>
+							</form>
+						</div>
+						<div class="order_selector">
+							<form class="form-inline">
+								<div class="form-group">
+									<label for="time">日期区间</label>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									<input type="datetime-local" class="form-control" id="minTime" placeholder="时间区间">到
+									<input type="datetime-local" class="form-control" id="maxTime" placeholder="时间区间">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default">筛选</button>
+								</div>
+							</form>
+						</div>
+						<hr />
+						<div class="taker_table">
+							<table class="table table-condensed">
+								<tr>
+									<td class="active">#订单编号</td>
+									<td class="success">#交易日期</td>
+									<td class="warning">#代取人</td>
+									<td class="danger">#代取人联系方式</td>
+									<td class="info">#费用</td>
+								</tr>
+								<tr>
+									<td class="active">123456</td>
+									<td class="success">2020-06-22 18:00:00</td>
+									<td class="warning">优衣</td>
+									<td class="danger">12345678910</td>
+									<td class="info">￥8</td>
+								</tr>
+								<tr>
+									<td class="active">123456</td>
+									<td class="success">2020-06-22 18:00:00</td>
+									<td class="warning">优衣</td>
+									<td class="danger">12345678910</td>
+									<td class="info">￥8</td>
+								</tr>
+							</table>
+						</div>
+						<div class="pagehelper">
+							<nav aria-label="Page navigation">
+								<ul class="pagination">
+									<li>
+										<a href="#" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">1</a>
+									</li>
+									<li>
+										<a href="#">2</a>
+									</li>
+									<li>
+										<a href="#">3</a>
+									</li>
+									<li>
+										<a href="#">4</a>
+									</li>
+									<li>
+										<a href="#">5</a>
+									</li>
+									<li>
+										<a href="#" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+								
+							</nav>
+							&emsp;&emsp;共5页，41条记录
+						</div>
+
+					</div>
+				</div>
+			</div>
+	</body>
+
+</html>

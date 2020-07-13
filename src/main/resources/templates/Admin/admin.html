@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../resource/js/jquery-3.4.1.min.js"></script>
+		<link rel="stylesheet" href="../../resource/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../resource/css/main/header.css" />
+		<link rel="stylesheet" href="../../resource/css/main/footer.css" />
+		<link rel="stylesheet" type="text/css" href="../../resource/css/main/admin/admin.css" />
+		<script type="text/javascript" src="../../resource/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<!--
+        	作者：offline
+        	时间：2020-07-11
+        	描述：顶部栏
+        -->
+		<div class="page_top">
+			<a href="../../index.html"><img src="../../resource/img/logo.png" /></a>
+			<div class="dropdown" id="logAndReg_div">
+				<h4 class="btn btn-default btn-lg dropdown-toggle" id="user_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    				欢迎：XXXXXXXXXXXXX
+   				 <span class="caret"></span>
+  				</h4>
+				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="user_menu">
+					<li>
+						<a href="../User/UserCenter.html">个人中心</a>
+					</li>
+					<li>
+						<a href="../../index.html">返回首页</a>
+					</li>
+					<li>
+						<a href="#">退出登录</a>
+					</li>
+					<li role="separator" class="divider"></li>
+					<li>
+						<a href="#">用户须知与服务协议</a>
+					</li>
+				</ul>
+			</div>
+			<div class="main_panel">
+				 <hr />
+						<div class="user_selector">
+							<form class="form-inline">
+								<div class="form-group">
+									<label for="UID">账号（手机号码）</label>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									<input type="text" class="form-control" id="UID" placeholder="输入用户手机号">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default">筛选</button>
+								</div>
+							</form>
+						</div>
+						<div class="user_selector">
+							<form class="form-inline">
+								<div class="form-group">
+									<label for="credit">信誉积分区间</label>
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									<input type="number" class="form-control" id="minCredit" placeholder="最小值">到
+									<input type="number" class="form-control" id="maxCredit" placeholder="最大值">
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-default">筛选</button>
+								</div>
+							</form>
+						</div>
+						<hr />
+						<div class="user_table">
+							<table class="table table-condensed">
+								<tr>
+									<td class="active">#UID</td>
+									<td class="success">#昵称</td>
+									<td class="warning">#信誉分</td>
+									<td class="danger">#操作</td>
+									
+								</tr>
+								<tr>
+									<td class="active">12345678910</td>
+									<td class="success">真步</td>
+									<td class="warning">95</td>
+									<td class="danger"><a>冻结</a>&emsp;&emsp;/&emsp;&emsp;<a>恢复</a></td>
+									
+								</tr>
+								<tr>
+									<td class="active">12345677788</td>
+									<td class="success">优衣</td>
+									<td class="warning">100</td>
+									<td class="danger"><a>冻结</a>&emsp;&emsp;/&emsp;&emsp;<a>恢复</a></td>
+									
+								</tr>
+							</table>
+						</div>
+						
+						<div class="pagehelper">
+							<nav aria-label="Page navigation">
+								<ul class="pagination">
+									<li>
+										<a href="#" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">1</a>
+									</li>
+									<li>
+										<a href="#">2</a>
+									</li>
+									<li>
+										<a href="#">3</a>
+									</li>
+									<li>
+										<a href="#">4</a>
+									</li>
+									<li>
+										<a href="#">5</a>
+									</li>
+									<li>
+										<a href="#" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</ul>
+								
+							</nav>
+							&emsp;&emsp;共5页，41条记录
+						</div>
+
+			</div>
+	</body>
+</html>

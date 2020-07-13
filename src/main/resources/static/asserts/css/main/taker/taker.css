@@ -1,0 +1,41 @@
+#nav_tabs{
+	margin-top: 40px;
+	margin-left: 40px;
+	margin-right: 40px;
+	font-size: 24px;
+}
+.your_table{
+	float: left;
+	padding: 10px 10px;
+	
+}
+.your_table table tr:first-child{
+	
+	height: 170px;
+}
+.your_table table{
+	
+	width: 270px;
+	height: 270px;
+	border-radius: 3px;
+	padding: 3px;
+	box-shadow: 0px 0px 5px #000;
+	text-align: center;
+	font-size: 16px;
+	
+}
+.order_selector{
+	width:33%;
+	display: inline-block;
+	padding-right: 10px;
+}
+.tab-content{
+	margin-left: 30px;
+}
+.pagehelper{
+	margin: 0 auto;
+	text-align: center;
+}
+.taker_table{
+margin-right: 30px;
+}

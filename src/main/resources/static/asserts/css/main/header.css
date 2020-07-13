@@ -1,0 +1,10 @@
+.page_top{
+	height: 158px;
+	background-color: white;
+	width: 1920px;
+}
+#logAndReg_div{
+	float: right;
+	margin-top: 60px;
+	margin-right: 150px;
+}
