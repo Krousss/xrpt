@@ -20,4 +20,14 @@ public class JumpController {
     public String toUserCenter(){
         return "User/UserCenter";
     }
+
+    @RequestMapping("/toOrderDetail")
+    public String toOrderDetail(){
+        return "Poster/orderDetail";
+    }
+
+    @RequestMapping("/toTakerCenter")
+    public String toTakerCenter(){
+        return "Taker/TakerCenter";
+    }
 }
