@@ -30,4 +30,9 @@ public class JumpController {
     public String toTakerCenter(){
         return "Taker/TakerCenter";
     }
+
+    @RequestMapping("/toAdmin")
+    public String toAdmin(){
+        return "Admin/admin";
+    }
 }
