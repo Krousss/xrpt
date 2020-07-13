@@ -29,4 +29,5 @@ public class UserController {
         model.addObject("users",users);
         return model;
     }
+
 }
