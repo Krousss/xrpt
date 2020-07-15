@@ -57,20 +57,20 @@
                             	时间：2020-07-11
                             	描述：注册表单
                             -->
-							<form action="View/succeed.html" id="reg_form">
+							<form action="userRegister" id="reg_form">
 								<div class="modal-body">
 									<div class="form-group">
 										<label for="recipient-name" class="control-label">账号(推荐用手机号):</label>
 										<span class="alert" id="r_uid">AJAX校验提示文本保留处</span>
-										<input type="text" class="form-control" id="UID">
+										<input type="text" class="form-control" id="phone" name="phone">
 										
 										<label for="recipient-name" class="control-label">昵称:</label>
 										<span class="alert" id="r_userName">AJAX校验提示文本保留处</span>
-										<input type="text" class="form-control" id="userName">
+										<input type="text" class="form-control" id="userName" name="name">
 										
 										<label for="recipient-name" class="control-label">密码:</label>
 										<span class="alert" id="r_pass1">AJAX校验提示文本保留处</span>
-										<input type="password" class="form-control" id="password1">
+										<input type="password" class="form-control" id="password" name="password">
 										
 										<label for="recipient-name" class="control-label">重复密码:</label>
 										<span class="alert" id="r_pass2">AJAX校验提示文本保留处</span>
@@ -81,7 +81,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary" id="reg_submitbut">注册</button>
+									<button type="submit" class="btn btn-primary" id="reg_submitbut">注册</button>
 								</div>
 
 							</form>
@@ -107,23 +107,23 @@
                             	时间：2020-07-11
                             	描述：登录表单
                             -->
-							<form action="templates/succeed.html" id="log_form">
+							<form action="/xrpt/userLogin" id="log_form" method="post">
 								<div class="modal-body">
 									<div class="form-group">
 										<label for="recipient-name" class="control-label">账号:</label>
 										<span class="alert" id="l_uid">AJAX校验提示文本保留处</span>
-										<input type="text" class="form-control" id="UID">									
+										<input type="text" class="form-control" name="phone">
 										
 										<label for="recipient-name" class="control-label">密码:</label>
 										<span class="alert" id="l_pass">AJAX校验提示文本保留处</span>
-										<input type="password" class="form-control" id="password">
+										<input type="password" class="form-control" name="password">
 										
 									</div>
 									
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary" id="log_submitbut">登录</button>
+									<button type="submit" class="btn btn-primary" id="log_submitbut">登录</button>
 								</div>
 
 							</form>
@@ -164,5 +164,5 @@
 		</div>
 
 	</body>
-	<script type="text/javascript" src="asserts/js/main/index.js"></script>
+<!--	<script type="text/javascript" src="asserts/js/main/index.js"></script>-->
 </html>
