@@ -2,10 +2,14 @@ package com.xrpt.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.nio.charset.Charset;
+import java.util.List;
 
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
@@ -22,7 +26,20 @@ public class MyMvcConfig implements WebMvcConfigurer {
         return adapter;
     }
 
-//    @Override
+    //1.跳转中文乱码1
+    @Bean
+    public HttpMessageConverter<String> responseBodyConverter() {
+        StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+        return converter;
+    }
+
+    //2.跳转中文乱码2
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(responseBodyConverter());
+    }
+
+    //    @Override
 //    public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(new LoginHandlerIntercepter()).addPathPatterns("/**")
 //                .excludePathPatterns("/","/login.html","/login");

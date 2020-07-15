@@ -43,20 +43,17 @@ public class UserController {
      * @Date:2020/7/15
      */
     @RequestMapping("/userLogin")
-    public ModelAndView userLogin(User user, HttpSession session,HttpServletResponse response) throws IOException {
-        System.out.println("用户登录");
+    public String userLogin(User user, HttpSession session,HttpServletResponse response) throws IOException {
         User currentUser = userService.userLogin(user);
-        ModelAndView model = new ModelAndView();
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         System.out.println(currentUser);
         if(currentUser != null){
-            model.setViewName("index");
-            model.addObject("currentUser",currentUser);
             session.setAttribute("currentUser",currentUser);
         }else{
             out.write("<script>alert('用户名或密码错误')</script>");
         }
-        return model;
+        return "index";
     }
 
     /**
