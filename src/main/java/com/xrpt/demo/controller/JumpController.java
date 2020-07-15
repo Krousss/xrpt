@@ -40,4 +40,9 @@ public class JumpController {
     public String toTakerDetail(){
         return "Taker/takerDetail";
     }
+
+    @RequestMapping("/toIndex")
+    public String toIndex(){
+        return "index";
+    }
 }

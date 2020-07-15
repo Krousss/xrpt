@@ -11,9 +11,9 @@
         <result column="t_address" property="address" jdbcType="VARCHAR" />
         <result column="t_phone" property="phone" jdbcType="VARCHAR" />
         <result column="t_code" property="code" jdbcType="VARCHAR" />
-        <result column="t_ddl" property="ddl" jdbcType="DATETIME" />
+        <result column="t_ddl" property="ddl" jdbcType="TIMESTAMP" />
         <result column="t_price" property="price" jdbcType="DECIMAL" />
-        <result column="t_date" property="date" jdbcType="DATETIME" />
+        <result column="t_date" property="date" jdbcType="TIMESTAMP" />
         <result column="t_state" property="state" jdbcType="INTEGER" />
     </resultMap>
 

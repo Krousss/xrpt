@@ -50,7 +50,7 @@ public class UserController {
         PrintWriter out = response.getWriter();
         System.out.println(currentUser);
         if(currentUser != null){
-            model.setViewName("redirect:/index.html");
+            model.setViewName("index");
             model.addObject("currentUser",currentUser);
             session.setAttribute("currentUser",currentUser);
         }else{

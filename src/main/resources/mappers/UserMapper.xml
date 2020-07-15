@@ -23,6 +23,6 @@
     </select>
 
     <insert id="userRegister" parameterType="com.xrpt.demo.entity.User">
-        INSERT INTO tab_user (t_phone,t_password,t_name,t_credit,t_state,t_real) VALUES (#{phone},#{password},#{uname},5,1,"url")
+        INSERT INTO tab_user (t_phone,t_password,t_name,t_credit,t_state,t_real) VALUES (#{phone},#{password},#{uname},90,1,"url")
     </insert>
 </mapper>
