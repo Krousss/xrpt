@@ -1,22 +1,42 @@
 package com.xrpt.demo.entity;
 
-public class User {
-    private Integer id;
-    private String phone;
-    private String password;
+import java.io.Serializable;
 
-    public User(Integer id, String phone, String password) {
-        this.id = id;
-        this.phone = phone;
-        this.password = password;
+/**
+ * @Author:cjs
+ * @Description:用户类
+ * @Date:Created in 9:53 2020/7/15
+ * @Modified by:
+ */
+public class User implements Serializable {
+    private Integer uid;//用户id
+    private String phone;//手机号
+    private String password;//密码
+    private String uname;//用户名
+    private int credit;//信用分
+    private int state;//状态：0冻结、1正常
+    private String real; //真实姓名
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("uid=").append(uid);
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", uname='").append(uname).append('\'');
+        sb.append(", credit=").append(credit);
+        sb.append(", state=").append(state);
+        sb.append(", real='").append(real).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public String getPhone() {
@@ -33,5 +53,37 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getReal() {
+        return real;
+    }
+
+    public void setReal(String real) {
+        this.real = real;
     }
 }

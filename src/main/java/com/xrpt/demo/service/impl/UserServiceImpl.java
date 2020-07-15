@@ -18,4 +18,14 @@ public class UserServiceImpl implements UserService {
     public List<User> queryAllUser() {
         return userDao.queryAllUser();
     }
+
+    @Override
+    public User userLogin(User user) {
+        return userDao.userLogin(user);
+    }
+
+    @Override
+    public int userRegister(User user) {
+        return userDao.userRegister(user);
+    }
 }
