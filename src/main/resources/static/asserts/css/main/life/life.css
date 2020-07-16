@@ -1,0 +1,33 @@
+#nav_tabs{
+	margin-top: 40px;
+	margin-left: 40px;
+	margin-right: 40px;
+	font-size: 24px;
+}
+.order_selector{
+	width:33%;
+	display: inline-block;
+	padding-right: 10px;
+}
+.tab-content{
+	margin-left: 30px;
+}
+.cookbook{
+	width: 405px;
+	height: 300px;
+	display: inline-block;
+	margin-right: 40px;
+	margin-top: 20px;
+	cursor:pointer;
+	text-align: center;
+}
+.cookbook img{
+	border-radius: 10px;
+}
+.cookbook a{
+	color: black;
+}
+.cookbook h4:hover{
+	color: orange;
+}
+

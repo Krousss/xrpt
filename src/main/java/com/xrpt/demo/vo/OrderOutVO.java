@@ -1,5 +1,6 @@
 package com.xrpt.demo.vo;
 
+import com.xrpt.demo.entity.Location;
 import com.xrpt.demo.entity.Order;
 import com.xrpt.demo.entity.User;
 
@@ -11,5 +12,5 @@ import com.xrpt.demo.entity.User;
 public class OrderOutVO {
     private Order order;
     private User taker;
-//    private Location location;
+    private Location location;
 }
