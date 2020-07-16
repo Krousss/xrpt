@@ -1,5 +1,6 @@
 package com.xrpt.demo.dao;
 
+import com.xrpt.demo.entity.Location;
 import com.xrpt.demo.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,10 @@ public interface UserDao {
      * @Date:2020/7/15
      */
     public int userRegister(User user);
-
+    /**
+     * @Author:cjs
+     * @Description:通过id查询单条地址
+     * @Date:2020/7/15
+     */
+    public Location queryOneLocation(int lid);
 }

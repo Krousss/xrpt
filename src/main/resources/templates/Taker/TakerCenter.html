@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
@@ -55,6 +55,9 @@
 					</li>
 					<li role="presentation">
 						<a href="#token" aria-controls="token" role="tab" data-toggle="tab">接到的订单</a>
+					</li>
+					<li role="presentation">
+						<a href="#unPay" aria-controls="unPay" role="tab" data-toggle="tab">待支付订单</a>
 					</li>
 					<li role="presentation">
 						<a href="#finished" aria-controls="finished" role="tab" data-toggle="tab">已完成的订单</a>
@@ -164,7 +167,6 @@
 									<tr class="warning">
 										<td>驿站位置：</td>
 										<td>厦软后门菜鸟驿站</td>
-
 									</tr>
 									<tr class="danger">
 										<td>交货地址：</td>
@@ -178,14 +180,19 @@
 							</a>
 						</div>
 					</div>
+
 					<div role="tabpanel" class="tab-pane" id="token">
 						<!--
                         	作者：offline
                         	时间：2020-07-12
                         	描述：第二页
                         -->
-						<div class="your_table">
-
+							<!--
+								作者：wjx
+								时间：2020-07-16
+								描述：已接受订单循环显示
+							-->
+						<div th:each="order2VO:${orders2VO}" class="your_table">
 							<table border="0px" cellspacing="" cellpadding="" class="table">
 								<!-- On rows -->
 								<tr>
@@ -195,33 +202,33 @@
 								</tr>
 								<tr class="success">
 									<td>收货人：</td>
-									<td>真步</td>
+									<td>[[${order2VO.order.poster}]]</td>
 								</tr>
 								<tr class="warning">
 									<td>联系方式：</td>
-									<td>12345678910</td>
-
+									<td>[[${order2VO.order.phone}]]</td>
 								</tr>
 								<tr class="danger">
 									<td>交货地址：</td>
-									<td>学生宿舍E1-427</td>
-
+									<td>[[${order2VO.order.address}]]</td>
+								</tr>
+								<tr class="success">
+									<td>驿站位置：</td>
+									<td>[[${order2VO.location.content}]]</td>
 								</tr>
 								<tr class="info">
 									<td>取件码：</td>
 									<td>
-										D2-0322
+										[[${order2VO.order.code}]]
 									</td>
-
 								</tr>
 								<tr class="success">
 									<td>交货时间：</td>
-									<td>2020-06-22 18:00:00</td>
+									<td th:text="${#dates.format(order2VO.order.ddl, 'yyyy-MM-dd HH:mm:ss')}"></td>
 								</tr>
 								<tr class="warning">
 									<td>剩余时间：</td>
 									<td>00:14:39</td>
-
 								</tr>
 								<tr class="info">
 									<td>操作：</td>
@@ -229,43 +236,98 @@
 										<a href="">取消接单</a>&emsp;/&emsp;
 										<a href="" data-toggle="modal" data-target="#conform">确认交货</a>
 									</td>
-
 								</tr>
 							</table>
-							<!--
-                            	作者：offline
-                            	时间：2020-07-13
-                            	描述：设置价格模态框
-                            -->
-							<!-- Modal -->
-							<div class="modal fade" id="conform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title" id="myModalLabel">设置价格</h4>
-										</div>
-										<form>
-											<div class="modal-body">
-												<div class="form-group">
-													<label for="price">价格(元)</label>
-													<select class="form-control" id="price" placeholder="价格">
-														<option value="3">￥3（小件）</option>
-														<option value="5">￥5（中件）</option>
-														<option value="8">￥8（大件）</option>
-													</select>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-												<button type="submit" class="btn btn-primary">提交</button>
-											</div>
-										</form>
-									</div>
+						</div>
+					</div>
+
+					<div role="tabpanel" class="tab-pane" id="unPay">
+						<!--
+                        	作者：wjx
+                        	时间：2020-07-16
+                        	描述：第三页 待付款
+                        -->
+						<div th:each="order2VO:${orders2VO}" class="your_table">
+							<table border="0px" cellspacing="" cellpadding="" class="table">
+								<!-- On rows -->
+								<tr>
+									<td colspan="2" class="goods_img">
+										<img src="asserts/img/goods.png" />
+									</td>
+								</tr>
+								<tr class="success">
+									<td>收货人：</td>
+									<td>[[${order2VO.order.poster}]]</td>
+								</tr>
+								<tr class="warning">
+									<td>联系方式：</td>
+									<td>[[${order2VO.order.phone}]]</td>
+								</tr>
+								<tr class="danger">
+									<td>交货地址：</td>
+									<td>[[${order2VO.order.address}]]</td>
+								</tr>
+								<tr class="success">
+									<td>驿站位置：</td>
+									<td>[[${order2VO.location.content}]]</td>
+								</tr>
+								<tr class="info">
+									<td>取件码：</td>
+									<td>
+										[[${order2VO.order.code}]]
+									</td>
+								</tr>
+								<tr class="success">
+									<td>交货时间：</td>
+									<td th:text="${#dates.format(order2VO.order.ddl, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								</tr>
+								<tr class="warning">
+									<td>剩余时间：</td>
+									<td>00:14:39</td>
+								</tr>
+								<tr class="info">
+									<td>操作：</td>
+									<td>
+										<a href="">取消接单</a>&emsp;/&emsp;
+										<a href="" data-toggle="modal" data-target="#conform">确认交货</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!--
+						作者：offline
+						时间：2020-07-13
+						描述：设置价格模态框
+					-->
+					<!-- Modal -->
+					<div class="modal fade" id="conform" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">设置价格</h4>
 								</div>
+								<form action="commitOrder" method="post">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="price">价格(元)</label>
+											<select name="price" class="form-control" id="price" placeholder="价格">
+												<option value="3">￥3（小件）</option>
+												<option value="5">￥5（中件）</option>
+												<option value="8">￥8（大件）</option>
+											</select>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<button type="submit" class="btn btn-primary">提交</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
+
 					<div role="tabpanel" class="tab-pane" id="finished">
 						<!--
                         	作者：offline

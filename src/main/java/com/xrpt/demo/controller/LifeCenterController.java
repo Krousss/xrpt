@@ -11,11 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lifecenter")
 public class LifeCenterController {
     @Autowired
     private CookBooksService cookBooksService;
-    @RequestMapping("/culling")
+    @RequestMapping("/lifeCenter")
     public ModelAndView lifecenter(){
         List<Cookbooks> cookbooks=cookBooksService.getCookBooks();
         ModelAndView model = new ModelAndView();
@@ -31,7 +30,7 @@ public class LifeCenterController {
         index+=doc;
         return index;
     }
-    @RequestMapping("search")
+    @RequestMapping("/search")
     public ModelAndView lifecenter(String query){
         List<Cookbooks> cookbooks=cookBooksService.searchCookBooks(query);
 

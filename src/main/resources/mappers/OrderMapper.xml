@@ -17,7 +17,11 @@
         <result column="t_state" property="state" jdbcType="INTEGER" />
     </resultMap>
 
-    <select id="queryOrderByState" resultMap="ResultMapOrder" parameterType="Integer">
-        select * from tab_order where t_state = #{state}
+    <select id="queryAcceptedOrder" resultMap="ResultMapOrder" parameterType="Integer">
+        select * from tab_order where t_state = #{state} and t_taker = #{takerID}
     </select>
+
+    <update id="commitOrder" parameterType="Integer">
+        update order set t_price = #{price} and t_state = 2 where oid = #{oid}
+    </update>
 </mapper>

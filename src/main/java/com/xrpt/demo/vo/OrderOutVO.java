@@ -13,4 +13,28 @@ public class OrderOutVO {
     private Order order;
     private User taker;
     private Location location;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public User getTaker() {
+        return taker;
+    }
+
+    public void setTaker(User taker) {
+        this.taker = taker;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 }

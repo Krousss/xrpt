@@ -11,7 +11,11 @@
         <result column="t_credit" property="credit" jdbcType="INTEGER" />
         <result column="t_state" property="state" jdbcType="INTEGER" />
         <result column="t_real" property="real" jdbcType="VARCHAR" />
+    </resultMap>
 
+    <resultMap type="com.xrpt.demo.entity.Location" id="ResultMapLocation">
+        <id column="t_lid" property="lid" jdbcType="INTEGER" />
+        <result column="t_content" property="content" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="queryAllUser" resultMap="ResultMapUser">
@@ -25,4 +29,9 @@
     <insert id="userRegister" parameterType="com.xrpt.demo.entity.User">
         INSERT INTO tab_user (t_phone,t_password,t_name,t_credit,t_state,t_real) VALUES (#{phone},#{password},#{uname},90,1,"url")
     </insert>
+
+    <!--查询单个地址-->
+    <select id="queryOneLocation" resultMap="ResultMapLocation">
+        select * from tab_location where t_lid = #{lid}
+    </select>
 </mapper>
