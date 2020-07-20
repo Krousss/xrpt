@@ -13,6 +13,15 @@ public class OrderOutVO {
     private Order order;
     private User taker;
     private Location location;
+    private long leftMills;
+
+    public long getLeftMills() {
+        return leftMills;
+    }
+
+    public void setLeftMills(long leftMills) {
+        this.leftMills = leftMills;
+    }
 
     public Order getOrder() {
         return order;

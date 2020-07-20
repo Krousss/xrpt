@@ -50,7 +50,7 @@
 
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist" id="nav_tabs">
-					<li role="presentation" class="active">
+					<li role="presentation" class="active" id="waitingg">
 						<a href="#waiting" aria-controls="waiting" role="tab" data-toggle="tab">待接订单区</a>
 					</li>
 					<li role="presentation">
@@ -59,7 +59,7 @@
 					<li role="presentation">
 						<a href="#unPay" aria-controls="unPay" role="tab" data-toggle="tab">待支付订单</a>
 					</li>
-					<li role="presentation">
+					<li role="presentation" id="finishedd">
 						<a href="#finished" aria-controls="finished" role="tab" data-toggle="tab">已完成的订单</a>
 					</li>
 				</ul>
@@ -96,7 +96,7 @@
 						<div class="order_selector">
 							<form class="form-inline">
 								<div class="form-group">
-									<label for="time">日期区间</label>
+									<label>日期区间</label>
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 									<input type="datetime-local" class="form-control" id="minTime" placeholder="时间区间">到
 									<input type="datetime-local" class="form-control" id="maxTime" placeholder="时间区间">
@@ -143,7 +143,7 @@
 
 									</tr>
 									<tr class="success">
-										<td>交货时间：</td>
+										<td>限定时间：</td>
 										<td>2020-06-22 18:00:00</td>
 									</tr>
 
@@ -173,7 +173,7 @@
 										<td>学生宿舍E1-427</td>
 									</tr>
 									<tr class="success">
-										<td>交货时间：</td>
+										<td>限定时间：</td>
 										<td>2020-06-22 18:00:00</td>
 									</tr>
 								</table>
@@ -187,65 +187,10 @@
                         	时间：2020-07-12
                         	描述：第二页
                         -->
-							<!--
-								作者：wjx
-								时间：2020-07-16
-								描述：已接受订单循环显示
-							-->
-						<div th:each="order2VO:${orders2VO}" class="your_table">
-							<table border="0px" cellspacing="" cellpadding="" class="table">
-								<!-- On rows -->
-								<tr>
-									<td colspan="2" class="goods_img">
-										<img src="asserts/img/goods.png" />
-									</td>
-								</tr>
-								<tr class="success">
-									<td>收货人：</td>
-									<td>[[${order2VO.order.poster}]]</td>
-								</tr>
-								<tr class="warning">
-									<td>联系方式：</td>
-									<td>[[${order2VO.order.phone}]]</td>
-								</tr>
-								<tr class="danger">
-									<td>交货地址：</td>
-									<td>[[${order2VO.order.address}]]</td>
-								</tr>
-								<tr class="success">
-									<td>驿站位置：</td>
-									<td>[[${order2VO.location.content}]]</td>
-								</tr>
-								<tr class="info">
-									<td>取件码：</td>
-									<td>
-										[[${order2VO.order.code}]]
-									</td>
-								</tr>
-								<tr class="success">
-									<td>交货时间：</td>
-									<td th:text="${#dates.format(order2VO.order.ddl, 'yyyy-MM-dd HH:mm:ss')}"></td>
-								</tr>
-								<tr class="warning">
-									<td>剩余时间：</td>
-									<td>00:14:39</td>
-								</tr>
-								<tr class="info">
-									<td>操作：</td>
-									<td>
-										<a href="">取消接单</a>&emsp;/&emsp;
-										<a href="" data-toggle="modal" data-target="#conform">确认交货</a>
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-
-					<div role="tabpanel" class="tab-pane" id="unPay">
 						<!--
-                        	作者：wjx
-                        	时间：2020-07-16
-                        	描述：第三页 待付款
+                            作者：wjx
+                            时间：2020-07-16
+                            描述：已接受订单循环显示
                         -->
 						<div th:each="order2VO:${orders2VO}" class="your_table">
 							<table border="0px" cellspacing="" cellpadding="" class="table">
@@ -278,23 +223,79 @@
 									</td>
 								</tr>
 								<tr class="success">
-									<td>交货时间：</td>
+									<td>限定时间：</td>
 									<td th:text="${#dates.format(order2VO.order.ddl, 'yyyy-MM-dd HH:mm:ss')}"></td>
 								</tr>
 								<tr class="warning">
 									<td>剩余时间：</td>
-									<td>00:14:39</td>
+									<td class="leftTime" checkstate="0" th:value="${order2VO.leftMills}"></td>
 								</tr>
 								<tr class="info">
 									<td>操作：</td>
 									<td>
-										<a href="">取消接单</a>&emsp;/&emsp;
-										<a href="" data-toggle="modal" data-target="#conform">确认交货</a>
+										<a href="" th:href="@{'/takerCancle?oid='+${order2VO.order.oid}}">取消接单</a>&emsp;/&emsp;
+										<a href="" class="getHiddenOid" data-toggle="modal" data-target="#conform">确认交货</a>
+										<input class="hiddenOid" type="hidden" value="" th:value="${order2VO.order.oid}"/>
 									</td>
 								</tr>
 							</table>
 						</div>
 					</div>
+
+					<div role="tabpanel" class="tab-pane" id="unPay">
+						<!--
+                        	作者：wjx
+                        	时间：2020-07-16
+                        	描述：第三页 待付款
+                        -->
+						<div th:each="order3VO:${orders3VO}" class="your_table">
+							<table border="0px" cellspacing="" cellpadding="" class="table">
+								<!-- On rows -->
+								<tr>
+									<td colspan="2" class="goods_img">
+										<img src="asserts/img/goods.png" />
+									</td>
+								</tr>
+								<tr class="success">
+									<td>收货人：</td>
+									<td>[[${order3VO.order.poster}]]</td>
+								</tr>
+								<tr class="warning">
+									<td>联系方式：</td>
+									<td>[[${order3VO.order.phone}]]</td>
+								</tr>
+								<tr class="danger">
+									<td>交货地址：</td>
+									<td>[[${order3VO.order.address}]]</td>
+								</tr>
+								<tr class="success">
+									<td>驿站位置：</td>
+									<td>[[${order3VO.location.content}]]</td>
+								</tr>
+								<tr class="info">
+									<td>取件码：</td>
+									<td>
+										[[${order3VO.order.code}]]
+									</td>
+								</tr>
+								<tr class="success">
+									<td>限定时间：</td>
+									<td th:text="${#dates.format(order3VO.order.ddl, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								</tr>
+								<tr class="warning">
+									<td>完成时间：</td>
+									<td th:text="${#dates.format(order3VO.order.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								</tr>
+								<tr class="info">
+									<td>操作：</td>
+									<td>
+										<a href="#">提醒用户付款</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
 					<!--
 						作者：offline
 						时间：2020-07-13
@@ -317,6 +318,7 @@
 												<option value="5">￥5（中件）</option>
 												<option value="8">￥8（大件）</option>
 											</select>
+											<input id="targetOid" type="hidden" name="oid" value=""/>
 										</div>
 									</div>
 									<div class="modal-footer">
@@ -332,15 +334,15 @@
 						<!--
                         	作者：offline
                         	时间：2020-07-12
-                        	描述：第三页
+                        	描述：第四页
                         -->
 						<hr />
 						<div class="order_selector">
-							<form class="form-inline">
+							<form class="form-inline" action="toTakerCenter?to=1" method="post">
 								<div class="form-group">
 									<label for="takerName">收货人</label>
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-									<input type="text" class="form-control" id="takerName" placeholder="按收货人查询">
+									<input type="text" class="form-control" id="takerName" name="poster" placeholder="按收货人查询">
 								</div>
 								<div class="form-group">
 									<button type="submit" class="btn btn-default">筛选</button>
@@ -348,12 +350,12 @@
 							</form>
 						</div>
 						<div class="order_selector">
-							<form class="form-inline">
+							<form class="form-inline" action="toTakerCenter?to=1" method="post">
 								<div class="form-group">
-									<label for="time">日期区间</label>
+									<label>日期区间</label>
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-									<input type="datetime-local" class="form-control" id="minTime" placeholder="时间区间">到
-									<input type="datetime-local" class="form-control" id="maxTime" placeholder="时间区间">
+									<input type="datetime-local" class="form-control" id="minTime1" name="minTime" placeholder="时间区间">到
+									<input type="datetime-local" class="form-control" id="maxTime1" name="maxTime" placeholder="时间区间">
 								</div>
 								<div class="form-group">
 									<button type="submit" class="btn btn-default">筛选</button>
@@ -366,63 +368,107 @@
 								<tr>
 									<td class="active">#订单编号</td>
 									<td class="success">#交易日期</td>
-									<td class="warning">#代取人</td>
-									<td class="danger">#代取人联系方式</td>
+									<td class="warning">#收货人</td>
+									<td class="danger">#收货人联系方式</td>
 									<td class="info">#费用</td>
 								</tr>
-								<tr>
-									<td class="active">123456</td>
-									<td class="success">2020-06-22 18:00:00</td>
-									<td class="warning">优衣</td>
-									<td class="danger">12345678910</td>
-									<td class="info">￥8</td>
-								</tr>
-								<tr>
-									<td class="active">123456</td>
-									<td class="success">2020-06-22 18:00:00</td>
-									<td class="warning">优衣</td>
-									<td class="danger">12345678910</td>
-									<td class="info">￥8</td>
+								<tr th:each="order4VO:${orders4VO}">
+									<td class="active">[[${order4VO.order.oid}]]</td>
+									<td class="success">[[${#dates.format(order4VO.order.date, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+									<td class="warning">[[${order4VO.order.poster}]]</td>
+									<td class="danger">[[${order4VO.order.phone}]]</td>
+									<td class="info">￥[[${order4VO.order.price}]]</td>
 								</tr>
 							</table>
 						</div>
-						<div class="pagehelper">
-							<nav aria-label="Page navigation">
-								<ul class="pagination">
-									<li>
-										<a href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">1</a>
-									</li>
-									<li>
-										<a href="#">2</a>
-									</li>
-									<li>
-										<a href="#">3</a>
-									</li>
-									<li>
-										<a href="#">4</a>
-									</li>
-									<li>
-										<a href="#">5</a>
-									</li>
-									<li>
-										<a href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-									</li>
+						<div style="display:none;" id="goto" th:text="${goto}"></div>
+						<div>
+							<nav aria-label="...">
+								<ul class="pager">
+									<li><a href="#" class="page">第[[${page.pageNum}]]页</a><li>
+									<li><a th:href="@{'/toTakerCenter?to=1&page='+${page.firstPage}}" class="page">首页</a><li>
+									<li th:if="${page.pageNum}!=${page.firstPage}"><a th:href="@{'/toTakerCenter?to=1&page='+${page.prePage}}" class="page">上一页</a><li>
+									<li th:if="${page.pageNum}!=${page.lastPage}"><a th:href="@{'/toTakerCenter?to=1&page='+${page.nextPage}}" class="page">下一页</a><li>
+									<li><a th:href="@{'/toTakerCenter?to=1&page='+${page.lastPage}}" class="page">尾页</a><li>
+									<li><a href="#" class="page">共[[${page.pages}]]页</a><li>
 								</ul>
-
 							</nav>
-							&emsp;&emsp;共5页，41条记录
 						</div>
 
 					</div>
 				</div>
 			</div>
+		</div>
 	</body>
+	<script>
+		$(function(){
+			$(".getHiddenOid").click(function(){
+				var $parent = $(this).parent();
+				var oid = $parent.find(".hiddenOid").val();
+				$("#targetOid").attr('value',oid);
+			});
+			/*作者：wjx 倒计时方法*/
+			countTime();
+		});
 
+		/*作者：wjh 设置跳转页面和查询时保持原页面*/
+		window.onload = function(){
+			var goto = $("#goto").text()
+			if (goto == 1){
+				$("#finished").addClass("active");
+				$("#finishedd").addClass("active");
+				$("#waiting").removeClass("active");
+				$("#waitingg").removeClass("active");
+			}
+
+		};
+
+		/*作者：wjx 倒计时用到的对象*/
+		var Alarm = function (leftMillis, countFunc, endFunc) {
+			this.time = Math.floor(leftMillis / 1000); //时间
+			this.countFunc = countFunc; //计时函数
+			this.endFunc = endFunc; //结束函数
+			this.flag = 't' + Date.parse(new Date()); //
+		};
+
+		/*作者：wjx 倒计时对象重写start方法*/
+		Alarm.prototype.start = function () {
+			var self = this;
+
+			self.flag = setInterval(function () {
+				if (self.time < 0) {
+					clearInterval(self.flag);
+					self.endFunc();
+					console.log('计时结束');
+				} else {
+					var minute, hour, day, second;
+					day = Math.floor(self.time / 60 / 60 / 24) < 10 ? '0' + Math.floor(self.time / 60 / 60 / 24) : Math.floor(self.time / 60 / 60 / 24);
+					hour = Math.floor(self.time / 60 / 60 % 24) < 10 ? '0' + Math.floor(self.time / 60 / 60 % 24) : Math.floor(self.time / 60 / 60 % 24);
+					minute = Math.floor(self.time / 60 % 60) < 10 ? '0' + Math.floor(self.time / 60 % 60) : Math.floor(self.time / 60 % 60);
+					second = Math.floor(self.time % 60) < 10 ? '0' + Math.floor(self.time % 60) : Math.floor(self.time % 60);
+					//倒计时执行函数
+					self.countFunc(second, minute, hour, day);
+					self.time--;
+				}
+			}, 1000);
+		}
+		ctxPath = '[[@{/}]]';
+		/*作者：wjx 倒计时实现方法*/
+		var countTime = function () {
+			var eles = $('.leftTime'),
+					len = eles.length;
+			for (; len > 0; len--) {
+				var ele = eles.eq(len - 1);
+				(function (ele) {
+					leftMillis = ele.attr("value"),
+							alarm = new Alarm(leftMillis, function (second, minute, hour, day) { //计时钟
+								ele.text(hour + ':' + minute + ':' + second);
+							}, function () { //倒计时结束
+								ele.text('00:00:00（已超时）');
+							});
+					alarm.start();
+				})(ele);
+			}
+		};
+	</script>
 </html>

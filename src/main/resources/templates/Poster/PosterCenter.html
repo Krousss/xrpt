@@ -50,13 +50,16 @@
 
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist" id="nav_tabs">
-					<li role="presentation" class="active">
+					<li role="presentation" class="active" id="waitingg">
 						<a href="#waiting" aria-controls="waiting" role="tab" data-toggle="tab">待接的订单</a>
 					</li>
 					<li role="presentation">
 						<a href="#token" aria-controls="token" role="tab" data-toggle="tab">已被接受的订单</a>
 					</li>
 					<li role="presentation">
+						<a href="#unPay" aria-controls="unPay" role="tab" data-toggle="tab">待支付的订单</a>
+					</li>
+					<li role="presentation" id="finishedd">
 						<a href="#finished" aria-controls="finished" role="tab" data-toggle="tab">已完成的订单</a>
 					</li>
 				</ul>
@@ -227,8 +230,7 @@
                     	描述：第二页
                     -->
 					<div role="tabpanel" class="tab-pane" id="token">
-						<div class="your_table">
-
+						<div th:each="order2VO:${orders2VO}" class="your_table">
 							<table border="0px" cellspacing="" cellpadding="" class="table">
 								<!-- On rows -->
 								<tr>
@@ -238,52 +240,116 @@
 								</tr>
 								<tr class="success">
 									<td>代取人：</td>
-									<td>优衣（+98）</td>
+									<td>[[${order2VO.taker.uname}]]</td>
 								</tr>
 								<tr class="warning">
 									<td>联系方式：</td>
-									<td>12345678910</td>
-
+									<td>[[${order2VO.taker.phone}]]</td>
 								</tr>
 								<tr class="danger">
 									<td>交货地址：</td>
-									<td>学生宿舍E1-427</td>
-
+									<td>[[${order2VO.order.address}]]</td>
 								</tr>
 								<tr class="success">
-									<td>交货时间：</td>
-									<td>2020-06-22 18:00:00</td>
+									<td>驿站位置：</td>
+									<td>[[${order2VO.location.content}]]</td>
+								</tr>
+								<tr class="info">
+									<td>取件码：</td>
+									<td>
+										[[${order2VO.order.code}]]
+									</td>
+								</tr>
+								<tr class="success">
+									<td>限定时间：</td>
+									<td th:text="${#dates.format(order2VO.order.ddl, 'yyyy-MM-dd HH:mm:ss')}"></td>
 								</tr>
 								<tr class="warning">
-									<td>无责取消：</td>
-									<td>00:14:39</td>
-
+									<td>有责取消：</td>
+									<td>扣除相应信誉积分</td>
 								</tr>
 								<tr class="info">
 									<td>操作：</td>
 									<td>
-										<a href="">取消订单</a>&emsp;/&emsp;
-										<a href="">确认收货</a>
+										<a href="" th:href="@{'/userCancle?oid='+${order2VO.order.oid}}">取消接单</a>
+										<input class="hiddenOid" type="hidden" value="" th:value="${order2VO.order.oid}"/>
 									</td>
-
 								</tr>
 							</table>
-
+						</div>
+					</div>
+					<!--
+                    	作者：wjx
+                    	时间：2020-07-17
+                    	描述：第三页 待支付订单
+                    -->
+					<div role="tabpanel" class="tab-pane" id="unPay">
+						<div th:each="order3VO:${orders3VO}" class="your_table">
+							<table border="0px" cellspacing="" cellpadding="" class="table">
+								<!-- On rows -->
+								<tr>
+									<td colspan="2" class="goods_img">
+										<img src="asserts/img/goods.png" />
+									</td>
+								</tr>
+								<tr class="success">
+									<td>代取人：</td>
+									<td>[[${order3VO.taker.uname}]]</td>
+								</tr>
+								<tr class="warning">
+									<td>联系方式：</td>
+									<td>[[${order3VO.taker.phone}]]</td>
+								</tr>
+								<tr class="danger">
+									<td>交货地址：</td>
+									<td>[[${order3VO.order.address}]]</td>
+								</tr>
+								<tr class="success">
+									<td>驿站位置：</td>
+									<td>[[${order3VO.location.content}]]</td>
+								</tr>
+								<tr class="info">
+									<td>取件码：</td>
+									<td>
+										[[${order3VO.order.code}]]
+									</td>
+								</tr>
+								<tr class="success">
+									<td>限定时间：</td>
+									<td th:text="${#dates.format(order3VO.order.ddl, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								</tr>
+								<tr class="warning">
+									<td>完成时间：</td>
+									<td th:text="${#dates.format(order3VO.order.date, 'yyyy-MM-dd HH:mm:ss')}"></td>
+								</tr>
+								<tr class="danger" th:switch="${order3VO.order.price}">
+									<td>订单金额：</td>
+									<td th:case="3">￥[[${order3VO.order.price}]]（小件）</td>
+									<td th:case="5">￥[[${order3VO.order.price}]]（中件）</td>
+									<td th:case="8">￥[[${order3VO.order.price}]]（大件）</td>
+								</tr>
+								<tr class="info">
+									<td>操作：</td>
+									<td>
+										<a href="" th:href="@{/goAlipay(price=${order3VO.order.price},oid=${order3VO.order.oid})}">去付款</a>
+									</td>
+								</tr>
+							</table>
 						</div>
 					</div>
 					<!--
                     	作者：offline
                     	时间：2020-07-11
-                    	描述：第三页
+                    	描述：第四页
                     -->
 					<div role="tabpanel" class="tab-pane" id="finished">
 						<hr />
 						<div class="order_selector">
-							<form class="form-inline">
+							<form class="form-inline" action="toPosterCenter?to=1" method="post">
 								<div class="form-group">
 									<label for="takerName">代取人</label>
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-									<input type="text" class="form-control" id="takerName" placeholder="按代取人查询">
+									<input type="text" class="form-control" id="takerName" name="uname" placeholder="按代取人查询">
 								</div>
 								<div class="form-group">
 									<button type="submit" class="btn btn-default">筛选</button>
@@ -291,12 +357,12 @@
 							</form>
 						</div>
 						<div class="order_selector">
-							<form class="form-inline">
+							<form class="form-inline" action="toPosterCenter?to=1" method="post">
 								<div class="form-group">
-									<label for="time">日期区间</label>
+									<label>日期区间</label>
 									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-									<input type="datetime-local" class="form-control" id="minTime" placeholder="时间区间">&emsp;&emsp;to&emsp;&emsp;
-									<input type="datetime-local" class="form-control" id="maxTime" placeholder="时间区间">
+									<input type="datetime-local" class="form-control" id="minTime" name="minTime" placeholder="时间区间">&emsp;&emsp;to&emsp;&emsp;
+									<input type="datetime-local" class="form-control" id="maxTime" name="maxTime" placeholder="时间区间">
 								</div>
 								<div class="form-group">
 									<button type="submit" class="btn btn-default">筛选</button>
@@ -313,61 +379,46 @@
 									<td class="danger">#代取人联系方式</td>
 									<td class="info">#费用</td>
 								</tr>
-								<tr>
-									<td class="active">123456</td>
-									<td class="success">2020-06-22 18:00:00</td>
-									<td class="warning">优衣</td>
-									<td class="danger">12345678910</td>
-									<td class="info">￥8</td>
-								</tr>
-								<tr>
-									<td class="active">123456</td>
-									<td class="success">2020-06-22 18:00:00</td>
-									<td class="warning">优衣</td>
-									<td class="danger">12345678910</td>
-									<td class="info">￥8</td>
+								<tr th:each="order4VO:${orders4VO}">
+									<td class="active">[[${order4VO.order.oid}]]</td>
+									<td class="success">[[${#dates.format(order4VO.order.date, 'yyyy-MM-dd HH:mm:ss')}]]</td>
+									<td class="warning">[[${order4VO.taker.uname}]]</td>
+									<td class="danger">[[${order4VO.taker.phone}]]</td>
+									<td class="info">￥[[${order4VO.order.price}]]</td>
 								</tr>
 							</table>
 						</div>
-						<div class="pagehelper">
-							<nav aria-label="Page navigation">
-								<ul class="pagination">
-									<li>
-										<a href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">1</a>
-									</li>
-									<li>
-										<a href="#">2</a>
-									</li>
-									<li>
-										<a href="#">3</a>
-									</li>
-									<li>
-										<a href="#">4</a>
-									</li>
-									<li>
-										<a href="#">5</a>
-									</li>
-									<li>
-										<a href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-										</a>
-									</li>
+						<div style="display:none;" id="goto" th:text="${goto}"></div>
+						<div>
+							<nav aria-label="...">
+								<ul class="pager">
+									<li><a href="#" class="page">第[[${page.pageNum}]]页</a><li>
+									<li><a th:href="@{'/toPosterCenter?to=1&page='+${page.firstPage}}" class="page">首页</a><li>
+									<li th:if="${page.pageNum}!=${page.firstPage}"><a th:href="@{'/toPosterCenter?to=1&page='+${page.prePage}}" class="page">上一页</a><li>
+									<li th:if="${page.pageNum}!=${page.lastPage}"><a th:href="@{'/toPosterCenter?to=1&page='+${page.nextPage}}" class="page">下一页</a><li>
+									<li><a th:href="@{'/toPosterCenter?to=1&page='+${page.lastPage}}" class="page">尾页</a><li>
+									<li><a href="#" class="page">共[[${page.pages}]]页</a><li>
 								</ul>
-
 							</nav>
-							&emsp;&emsp;共5页，41条记录
 						</div>
-
 					</div>
 				</div>
 
 			</div>
 		</div>
+
+		<script type="text/javascript">
+			/*设置跳转页面和查询时保持原页面*/
+			window.onload = function(){
+				var goto = $("#goto").text()
+				if (goto == 1){
+					$("#finished").addClass("active");
+					$("#finishedd").addClass("active");
+					$("#waiting").removeClass("active");
+					$("#waitingg").removeClass("active");
+				}
+			};
+		</script>
 	</body>
 
 </html>

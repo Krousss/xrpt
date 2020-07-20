@@ -85,12 +85,29 @@
                 <version>1.1.10</version>
             </dependency>
         <!--END-->
+
         <!--START 7月16日 林圣泽 爬虫-->
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>1.11.3</version>
             </dependency>
+        <!--END-->
+
+        <!--START 7月18日 吴家星 沙箱支付 -->
+        <dependency>
+            <groupId>com.alipay.api</groupId>
+            <artifactId>k12-alipay-sdk</artifactId>
+            <version>0.0.1-beta</version>
+        </dependency>
+        <!--END-->
+
+        <!--START 7月17日 王家宏 分页-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
         <!--END-->
     </dependencies>
 

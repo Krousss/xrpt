@@ -17,6 +17,13 @@ public class User implements Serializable {
     private int state;//状态：0冻结、1正常
     private String real; //真实姓名
 
+    public User(Integer uid) {
+        this.uid = uid;
+    }
+
+    public User() {
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");

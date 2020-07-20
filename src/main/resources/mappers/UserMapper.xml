@@ -18,20 +18,119 @@
         <result column="t_content" property="content" jdbcType="VARCHAR" />
     </resultMap>
 
+    <resultMap type="com.xrpt.demo.entity.Admin" id="ResultMapAdmin">
+        <id column="t_aid" property="aid" jdbcType="INTEGER" />
+        <result column="t_phone" property="phone" jdbcType="VARCHAR" />
+        <result column="t_password" property="password" jdbcType="VARCHAR" />
+        <result column="t_profit" property="profit" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <select id="queryUserByID" parameterType="INTEGER" resultMap="ResultMapUser">
+        select * from tab_user where t_uid = #{uid}
+    </select>
+
+    <!--模糊查询，根据代取人查询-->
+    <select id="queryUserByName" parameterType="INTEGER" resultMap="ResultMapUser">
+        select * from tab_user where t_name like  '%${uname}%'
+    </select>
+
+    <update id="updateUserCredit">
+        update tab_user set t_credit = t_credit + #{credit} where t_uid = #{uid}
+    </update>
+
+    <update id="updateAdminProfit">
+        update tab_admin set t_profit = t_profit + #{profit}
+    </update>
+
+    <!--查询所有用户-->
     <select id="queryAllUser" resultMap="ResultMapUser">
         select * from tab_user
     </select>
-
+    <!--查询单个用户-->
+    <select id="queryOneUser" resultMap="ResultMapUser">
+        select * from tab_user where t_uid = #{uid}
+    </select>
+    <!--用户登录：通过手机号和密码查询-->
     <select id="userLogin" resultMap="ResultMapUser">
         select * from tab_user where t_phone = #{phone} and t_password = #{password}
     </select>
-
+    <!--用户注册-->
     <insert id="userRegister" parameterType="com.xrpt.demo.entity.User">
         INSERT INTO tab_user (t_phone,t_password,t_name,t_credit,t_state,t_real) VALUES (#{phone},#{password},#{uname},90,1,"url")
     </insert>
+    <!--删除用户（管理员）：通过uid删除-->
+    <delete id="delUser" parameterType="_int">
+        DELETE FROM tab_user WHERE t_uid = #{uid}
+    </delete>
+    <!--更新用户（管理员）-->
+    <update id="updUser" parameterType="com.xrpt.demo.entity.User">
+        update tab_user set t_phone = #{phone},t_password=#{password},t_name=#{uname}
+         ,t_credit=#{credit},t_state=#{state},t_real=#{real}
+         where t_uid = #{uid}
+    </update>
+    <!--更新用户（用户）-->
+    <update id="updMyself" parameterType="com.xrpt.demo.entity.User">
+        update tab_user set t_phone = #{phone},t_name=#{uname},t_real=#{real} where t_uid = #{uid}
+    </update>
+    <!--更新用户（根据id修改用户状态：冻结）-->
+    <update id="updState" parameterType="com.xrpt.demo.entity.User">
+        update tab_user set t_state = 0 where t_uid = #{uid}
+    </update>
+    <!--更新用户（根据id修改用户状态：恢复）-->
+    <update id="updRecover" parameterType="com.xrpt.demo.entity.User">
+        update tab_user set t_state = 1 where t_uid = #{uid}
+    </update>
+    <!--修改密码-->
+    <update id="rePassword" parameterType="com.xrpt.demo.entity.User">
+        update tab_user set t_password = #{password} where t_uid = #{uid}
+    </update>
+    <!--修改密码-->
+    <update id="reName" parameterType="com.xrpt.demo.entity.User">
+        update tab_user set t_name = #{uname} where t_uid = #{uid}
+    </update>
+    <!--通过手机查询单个用户-->
+    <select id="selectPhone" resultMap="ResultMapUser">
+        select * from tab_user where t_phone = #{phone}
+    </select>
+    <!--通过手机模糊查询多个-->
+    <select id="searchPhone" resultMap="ResultMapUser">
+        select * from tab_user where t_phone like "%"#{phone}"%"
+    </select>
+    <!--通过信誉分模糊查询多个-->
+    <select id="searchValue" resultMap="ResultMapUser">
+        select * from tab_user where 1=1
+        <if test="credit1 != null and credit1 !=''">
+            and t_credit <![CDATA[>=]]> #{credit1}
+        </if>
+        <if test="credit2 != null and credit2 !=''">
+            and t_credit <![CDATA[<=]]> #{credit2}
+        </if>
+        order by t_credit desc
+    </select>
 
+    <!--地址添加-->
+    <insert id="addLocation" parameterType="com.xrpt.demo.entity.Location">
+        insert into tab_location (t_content) values (#{content})
+    </insert>
+    <!--地址删除-->
+    <delete id="delLocation" parameterType="_int">
+        delete from tab_location where t_lid = #{lid}
+    </delete>
+    <!--地址更新-->
+    <update id="updLocation" parameterType="com.xrpt.demo.entity.Location">
+        update tab_location set t_content = #{content} where t_lid = #{lid}
+    </update>
+    <!--查询所有地址-->
+    <select id="queryAllLocation" resultMap="ResultMapLocation">
+        select * from tab_location
+    </select>
     <!--查询单个地址-->
     <select id="queryOneLocation" resultMap="ResultMapLocation">
         select * from tab_location where t_lid = #{lid}
+    </select>
+
+    <!--管理员登录-->
+    <select id="adminLogin" resultMap="ResultMapAdmin">
+        select * from tab_admin where t_phone = #{phone} and t_password = #{password}
     </select>
 </mapper>

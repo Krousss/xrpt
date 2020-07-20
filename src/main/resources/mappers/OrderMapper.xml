@@ -17,11 +17,37 @@
         <result column="t_state" property="state" jdbcType="INTEGER" />
     </resultMap>
 
-    <select id="queryAcceptedOrder" resultMap="ResultMapOrder" parameterType="Integer">
-        select * from tab_order where t_state = #{state} and t_taker = #{takerID}
+    <select id="queryTakerOrderByState" resultMap="ResultMapOrder" parameterType="Integer">
+        select * from tab_order where t_state = #{state} and t_taker = #{takerId}
+            <if test="poster!=null and poster!=''">
+                and  t_poster like '%${poster}%'
+            </if>
+            <if test="minTime!=null and minTime!='' and maxTime!=null and maxTime!=''">
+                <![CDATA[ and  t_date > #{minTime}  and  t_date <  #{maxTime}]]>
+            </if>
     </select>
 
-    <update id="commitOrder" parameterType="Integer">
-        update order set t_price = #{price} and t_state = 2 where oid = #{oid}
+
+    <select id="queryUserOrderByState" resultMap="ResultMapOrder" parameterType="com.xrpt.demo.vo.OrderInputVo">
+        select * from tab_order where t_state = #{state} and t_uid = #{uid}
+            <if test="takerId!=null and takerId!=''">
+                 and  t_taker = #{takerId}
+            </if>
+            <if test="minTime!=null and minTime!='' and maxTime!=null and maxTime!=''">
+                <![CDATA[ and  t_date > #{minTime}  and  t_date <  #{maxTime}]]>
+            </if>
+    </select>
+
+    <select id="queryOneOrderByOid" resultMap="ResultMapOrder" parameterType="Integer">
+        select * from tab_order where t_oid = #{oid}
+    </select>
+
+    <update id="commitOrder">
+        update tab_order set t_price = #{price},t_state = 2,t_date = now() where t_oid = #{oid}
     </update>
+
+    <update id="updateOrderState">
+        update tab_order set t_state = #{state} where t_oid = #{oid}
+    </update>
+
 </mapper>

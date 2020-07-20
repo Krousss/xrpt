@@ -35,7 +35,7 @@
 			</li>
 			<li role="separator" class="divider"></li>
 			<li>
-				<a href="toManage">管理员端</a>
+				<a href="toIndex">返回首页</a>
 			</li>
 			<li>
 				<a href="#">用户须知与服务协议</a>
@@ -64,19 +64,19 @@
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="recipient-name" class="control-label">账号(推荐用手机号):</label>
-								<span class="alert" id="r_uid"></span>
-								<input type="text" class="form-control" id="selphone" name="phone">
+								<span class="alert" id="r_uid">AJAX校验提示文本保留处</span>
+								<input type="text" class="form-control" id="phone" name="phone">
 
 								<label for="recipient-name" class="control-label">昵称:</label>
-								<span class="alert" id="r_userName"></span>
+								<span class="alert" id="r_userName">AJAX校验提示文本保留处</span>
 								<input type="text" class="form-control" id="userName" name="name">
 
 								<label for="recipient-name" class="control-label">密码:</label>
-								<span class="alert" id="r_pass1"></span>
-								<input type="password" class="form-control" id="password1" name="password">
+								<span class="alert" id="r_pass1">AJAX校验提示文本保留处</span>
+								<input type="password" class="form-control" id="password" name="password">
 
 								<label for="recipient-name" class="control-label">重复密码:</label>
-								<span class="alert" id="r_pass2"></span>
+								<span class="alert" id="r_pass2">AJAX校验提示文本保留处</span>
 								<input type="password" class="form-control" id="password2">
 
 							</div>
@@ -110,7 +110,7 @@
                         时间：2020-07-11
                         描述：登录表单
                     -->
-					<form action="userLogin" id="log_form" method="post">
+					<form action="adminLogin" id="log_form" method="post">
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="recipient-name" class="control-label">账号:</label>
@@ -147,7 +147,7 @@
 	<img src="asserts/img/logo.png" />
 	<div class="dropdown" id="logAndReg_div">
 		<h4 class="btn btn-default btn-lg dropdown-toggle" id="user_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			欢迎：[[${session.currentUser.uname}]]
+			欢迎：管理员
 			<span class="caret"></span>
 		</h4>
 		<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="user_menu">
@@ -175,58 +175,15 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>找人代取</h1>
+			<h1>用户管理</h1>
 			<p>啊啦啦，有个快递，需要代取....</p>
 			<p>
-				<a class="btn btn-default btn-lg" href="toPosterCenter" role="button">去下单！</a>
-			</p>
-		</div>
-	</div>
-
-	<div class="jumbotron">
-		<div class="container">
-			<h1>帮人代取</h1>
-			<p>哎呀呀，刚好路过，取件赚钱....</p>
-			<p>
-				<a class="btn btn-default btn-lg" href="toTakerCenter" role="button">去接单！</a>
-			</p>
-		</div>
-	</div>
-
-	<div class="jumbotron">
-		<div class="container">
-			<h1>生活中心</h1>
-			<p>嗯哼哼，闲着没事，学会做菜....</p>
-			<p>
-				<a class="btn btn-default btn-lg" href="lifeCenter" role="button">去做菜！</a>
+				<a class="btn btn-default btn-lg" href="toAdmin" role="button">去用户管理！</a>
 			</p>
 		</div>
 	</div>
 </div>
 
 </body>
-<script type="text/javascript" src="asserts/js/main/index.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$("#selphone").blur(function(){
-			var phone = $("#selphone").val();
-			$.ajax({
-				type:"Post",
-				url:"http://localhost:8080/xrpt/selectPhone",
-				data:{
-					_method:"SELECT",
-					"phone":phone,
-				},
-				dataType:"json",
-				success:function(msg){
-					if("0" == eval(msg)){
-						alert("该姓名不可用")
-					}else{
-						alert("该姓名可用")
-					}
-				}
-			})
-		})
-	})
-</script>
+<!--	<script type="text/javascript" src="asserts/js/main/index.js"></script>-->
 </html>
