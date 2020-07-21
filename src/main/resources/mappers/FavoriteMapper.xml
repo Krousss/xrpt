@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xrpt.demo.dao.FavoriteDao">
+    <resultMap type="com.xrpt.demo.entity.Favorite" id="ResultMapFavorite">
+        <result column="t_furl" property="furl" jdbcType="VARCHAR" />
+        <result column="t_uid" property="uid" jdbcType="INTEGER" />
+        <result column="t_img" property="img" jdbcType="VARCHAR" />
+        <result column="t_fname" property="fname" jdbcType="VARCHAR" />
+    </resultMap>
+    <!--收藏 -->
+    <insert id="addFavoriteCookBook">
+        INSERT INTO tab_favorite (t_furl,t_uid,t_img,t_fname) VALUES (#{furl},#{uid},#{img},#{fname})
+    </insert>
+    <!--取消收藏 -->
+    <delete id="deleteFavoriteCookBook">
+        DELETE FROM tab_favorite WHERE t_furl=#{url} AND t_uid=#{id}
+    </delete>
+    <!--展示收藏  -->
+    <select id="queryAllFavoriteCookBook" parameterType="com.xrpt.demo.entity.Favorite" resultMap="ResultMapFavorite">
+        SELECT * FROM tab_favorite WHERE t_uid=#{id}
+    </select>
+    <!--校验查询  -->
+    <select id="queryOneFavoriteBook" parameterType="com.xrpt.demo.entity.Favorite" resultMap="ResultMapFavorite">
+        SELECT * FROM tab_favorite WHERE t_uid=#{id} AND t_furl=#{url}
+    </select>
+</mapper>

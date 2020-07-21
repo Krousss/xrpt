@@ -10,10 +10,12 @@
   spring:
     # thymeleaf必要配置
     thymeleaf:
+      prefix: classpath:/templates/
       cache: false
       servlet:
         content-type: text/html
-      mode: LEGACYHTML5
+      mode: HTML
+      encoding: UTF-8
     # 数据库/连接池 配置
     profiles:
       include: druid

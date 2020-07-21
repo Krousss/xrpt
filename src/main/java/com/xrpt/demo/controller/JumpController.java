@@ -105,7 +105,8 @@ public class JumpController {
         ModelAndView model = new ModelAndView();
         orderInputVo.setUid(currentUser.getUid());//设置登陆人的uid
         // 待接受订单
-//        List<Order> orders1 = orderService.queryOrderByState(0);
+        orderInputVo.setState(0);
+        List<Order> orders1 = orderService.queryUserOrderByState(orderInputVo);
         // 已接受订单
         orderInputVo.setState(1);
         List<Order> orders2 = orderService.queryUserOrderByState(orderInputVo);
@@ -113,7 +114,8 @@ public class JumpController {
         orderInputVo.setState(2);
         List<Order> orders3 = orderService.queryUserOrderByState(orderInputVo);
         // 已结束订单
-            //设置跳转分页也可以条件查询
+
+        //设置跳转分页也可以条件查询
         if (user.getUname()!=null){
             session.setAttribute("uname",user.getUname());
             session.removeAttribute("minTime");
@@ -136,10 +138,15 @@ public class JumpController {
                 orderInputVo.setTakerId(taker.getUid());
             }
         }
+
+        List<Location> locations = userService.queryLocations();
+        model.addObject("locations",locations);
+
         orderInputVo.setState(3);
         PageHelper.startPage(page,3);//设置分页
         List<Order> orders4 = orderService.queryUserOrderByState(orderInputVo);
 
+        List<OrderOutVO> orders1VO = getOrdersVO(orders1);
         List<OrderOutVO> orders2VO = getOrdersVO(orders2);
         List<OrderOutVO> orders3VO = getOrdersVO(orders3);
         List<OrderOutVO> orders4VO = getOrdersVO(orders4);
@@ -148,6 +155,7 @@ public class JumpController {
         if (to !=null){ model.addObject("goto",1);}//设置条件查询、分页时显示页面为已完成订单
         model.addObject("page",pageInfo);
 
+        model.addObject("orders1VO",orders1VO);
         model.addObject("orders2VO",orders2VO);
         model.addObject("orders3VO",orders3VO);
         model.addObject("orders4VO",orders4VO);
@@ -198,11 +206,6 @@ public class JumpController {
         return "User/UserCenter";
     }
 
-    @RequestMapping("/toOrderDetail")
-    public String toOrderDetail(){
-        return "Poster/orderDetail";
-    }
-
     @RequestMapping("/toTakerDetail")
     public String toTakerDetail(){
         return "Taker/takerDetail";
@@ -237,4 +240,26 @@ public class JumpController {
     }
 
     // 7.20 wjx 和 cjs的整合
+
+    //    叶芃辉修改于7.18
+    @RequestMapping("/toOrderDetail")
+    public ModelAndView toOrderDetail(@RequestParam("orderId") int oid){
+        System.out.println(oid);
+
+        Order order=orderService.queryOneOrderByOid(oid);
+
+        OrderOutVO orderOutVO = new OrderOutVO();
+        orderOutVO.setOrder(order);
+
+        Location location = userService.queryOneLocation(order.getLid());
+        orderOutVO.setLocation(location);
+
+        List<Location> locations = userService.queryLocations();
+
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("targetOrder",orderOutVO);
+        modelAndView.addObject("locations",locations);
+        modelAndView.setViewName("Poster/orderDetail");
+        return modelAndView;
+    }
 }

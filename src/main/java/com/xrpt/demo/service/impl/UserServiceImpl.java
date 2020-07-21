@@ -215,6 +215,7 @@ public class UserServiceImpl implements UserService {
     public User selectPhone(String phone) {
         return userDao.selectPhone(phone);
     }
+
     /**
      * @Author:cjs
      * @Description:管理员模糊查询账号
@@ -228,5 +229,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> searchValue(int credit1, int credit2) {
         return userDao.searchValue(credit1,credit2);
+    }
+
+    @Override
+    public List<Location> queryLocations() {
+        return userDao.queryLocations();
     }
 }

@@ -144,14 +144,14 @@ public class UserController {
      */
     @RequestMapping("/adminLogin")
     public ModelAndView adminLogin(Admin admin, HttpSession session, HttpServletResponse response) throws IOException {
-        Admin currentUser = userService.adminLogin(admin);
+        Admin currenAdmin = userService.adminLogin(admin);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
-        System.out.println(currentUser);
+        System.out.println(currenAdmin);
         ModelAndView modelAndView = new ModelAndView();
-        if(currentUser != null){
-            session.setAttribute("currentUser",currentUser);
+        if(currenAdmin != null){
+            session.setAttribute("currenAdmin",currenAdmin);
         }else{
             out.write("<script>alert('用户名或密码错误')</script>");
         }

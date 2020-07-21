@@ -133,4 +133,8 @@
     <select id="adminLogin" resultMap="ResultMapAdmin">
         select * from tab_admin where t_phone = #{phone} and t_password = #{password}
     </select>
+
+    <select id="queryLocations" resultMap="ResultMapLocation">
+        select * from tab_location
+    </select>
 </mapper>

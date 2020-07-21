@@ -182,5 +182,12 @@ public interface UserDao {
      */
     public List<User> searchValue(int credit1, int credit2);
 
+    /**
+     * @Author:yph
+     * @Description:查询所有地址
+     * @Date:不知道
+     */
+    public List<Location> queryLocations();
+
 
 }

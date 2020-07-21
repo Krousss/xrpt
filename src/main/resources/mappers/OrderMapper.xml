@@ -50,4 +50,33 @@
         update tab_order set t_state = #{state} where t_oid = #{oid}
     </update>
 
+    <insert id="addOrder" parameterType="com.xrpt.demo.entity.Order">
+        INSERT INTO tab_order (t_uid,t_poster,t_lid,t_address,t_phone,t_ddl,t_code,t_state,t_date) VALUES
+        (#{uid},#{poster},#{lid},#{address},#{phone},#{ddl},#{code},0,#{date})
+    </insert>
+
+    <update id="editPoster">
+        update tab_order set t_poster = #{poster} where t_oid = #{oid}
+    </update>
+
+    <update id="editLid">
+        update tab_order set t_lid = #{lid} where t_oid = #{oid}
+    </update>
+
+    <update id="editAddress">
+        update tab_order set t_address = #{address} where t_oid = #{oid}
+    </update>
+
+    <update id="editPhone">
+        update tab_order set t_phone = #{phone} where t_oid = #{oid}
+    </update>
+
+    <update id="editDDL">
+        update tab_order set t_ddl = #{ddl} where t_oid = #{oid}
+    </update>
+
+    <update id="editCode">
+        update tab_order set t_code = #{code} where t_oid = #{oid}
+    </update>
+
 </mapper>

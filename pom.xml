@@ -109,6 +109,14 @@
             <version>1.2.5</version>
         </dependency>
         <!--END-->
+
+        <!--叶芃辉7.19额外添加fastjson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.68</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -72,8 +72,8 @@
                     	描述：第一页
                     -->
 					<div role="tabpanel" class="tab-pane active" id="waiting">
-						<div class="your_table">
-							<a href="toOrderDetail">
+						<div th:each="order1VO:${orders1VO}"  class="your_table">
+							<a th:href="@{toOrderDetail(orderId=${order1VO.order.oid})}">
 								<table border="0px" cellspacing="" cellpadding="" class="table">
 									<!-- On rows -->
 									<tr>
@@ -83,89 +83,26 @@
 									</tr>
 									<tr class="success">
 										<td>发布者：</td>
-										<td>真步</td>
+										<td>[[${order1VO.order.poster}]]</td>
 									</tr>
 									<tr class="warning">
 										<td>驿站位置：</td>
-										<td>厦软后门菜鸟驿站</td>
+										<td>[[${order1VO.location.content}]]</td>
 
 									</tr>
 									<tr class="danger">
 										<td>交货地址：</td>
-										<td>学生宿舍E1-427</td>
+										<td>[[${order1VO.order.address}]]</td>
 
 									</tr>
 									<tr class="success">
 										<td>交货时间：</td>
-										<td>2020-06-22 18:00:00</td>
+										<td th:text="${#dates.format(order1VO.order.ddl, 'yyyy-MM-dd HH:mm:ss')}"></td>
 									</tr>
 
 								</table>
 							</a>
 						</div>
-
-						<div class="your_table">
-							<a href="toOrderDetail">
-								<table border="0px" cellspacing="" cellpadding="" class="table">
-									<!-- On rows -->
-									<tr>
-										<td colspan="2" class="goods_img">
-											<img src="asserts/img/goods.png" />
-										</td>
-									</tr>
-									<tr class="success">
-										<td>发布者：</td>
-										<td>真步</td>
-									</tr>
-									<tr class="warning">
-										<td>驿站位置：</td>
-										<td>厦软后门菜鸟驿站</td>
-
-									</tr>
-									<tr class="danger">
-										<td>交货地址：</td>
-										<td>学生宿舍E1-427</td>
-
-									</tr>
-									<tr class="success">
-										<td>交货时间：</td>
-										<td>2020-06-22 18:00:00</td>
-									</tr>
-								</table>
-							</a>
-						</div>
-
-						<div class="your_table">
-							<a href="toOrderDetail">
-								<table border="0px" cellspacing="" cellpadding="" class="table">
-									<!-- On rows -->
-									<tr>
-										<td colspan="2" class="goods_img">
-											<img src="asserts/img/goods.png" />
-										</td>
-									</tr>
-									<tr class="success">
-										<td>发布者：</td>
-										<td>真步</td>
-									</tr>
-									<tr class="warning">
-										<td>驿站位置：</td>
-										<td>厦软后门菜鸟驿站</td>
-
-									</tr>
-									<tr class="danger">
-										<td>交货地址：</td>
-										<td>学生宿舍E1-427</td>
-
-									</tr>
-									<tr class="success">
-										<td>交货时间：</td>
-										<td>2020-06-22 18:00:00</td>
-									</tr>
-								</table>
-							</a>
-						</div>
-
 						<div class="your_table">
 							<a href="#" data-toggle="modal" data-target="#new">
 								<div border="0px" class="add_btn">
@@ -186,39 +123,40 @@
 										<h4 class="modal-title" id="myModalLabel">新增一个代取请求</h4>
 									</div>
 									<div class="modal-body">
-										<form action="" id="newOrder">
+										<form action="addOrder" id="newOrder" method="post" >
 											<div class="form-group">
 												<label for="userName">收货人</label>
-												<input type="text" class="form-control" id="userName" placeholder="怎么称呼您呢？">
+												<input name="poster" type="text" class="form-control" id="userName" placeholder="怎么称呼您呢？">
+												<input name="uid" th:value="${session.currentUser.uid}" type="hidden">
 											</div>
 											<div class="form-group">
 												<label for="location">驿站位置</label>
-												<select class="form-control" id="location">
-													<option>食堂对面菜鸟驿站</option>
-													<option>厦软后门菜鸟驿站</option>
+												<select name="lid" class="form-control" id="location">
+													<option th:each="location:${locations}" th:value="${location.lid}" th:text="${location.content}">食堂对面菜鸟驿站</option>
 												</select>
 											</div>
 											<div class="form-group">
 												<label for="address">交货地址</label>
-												<input type="text" class="form-control" id="address" placeholder="在哪交给您呢？">
+												<input name="address" type="text" class="form-control" id="address" placeholder="在哪交给您呢？">
 											</div>
 											<div class="form-group">
 												<label for="phone">联系电话</label>
-												<input type="text" class="form-control" id="phone" placeholder="您的手机联系方式">
+												<input name="phone" type="text" class="form-control" id="phone" placeholder="您的手机联系方式">
 											</div>
 											<div class="form-group">
 												<label for="DDL">最晚送达时间</label>
-												<input type="datetime-local" class="form-control" id="DDL">
+												<input name="ddl" type="datetime-local" class="form-control" id="DDL">
 											</div>
 											<div class="form-group">
 												<label for="code">取件码</label>
-												<input type="text" class="form-control" id="code" placeholder="您的快递取件码">
+												<input name="code" type="text" class="form-control" id="code" placeholder="您的快递取件码">
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+												<!--<button  type="submit" >提交</button>-->
+												<input type="submit" value="提交" class="btn btn-primary" />
 											</div>
 										</form>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-										<button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
 									</div>
 								</div>
 							</div>
@@ -271,7 +209,7 @@
 								<tr class="info">
 									<td>操作：</td>
 									<td>
-										<a href="" th:href="@{'/userCancle?oid='+${order2VO.order.oid}}">取消接单</a>
+										<a href="" th:href="@{'/userCancle?oid='+${order2VO.order.oid}}">取消订单</a>
 										<input class="hiddenOid" type="hidden" value="" th:value="${order2VO.order.oid}"/>
 									</td>
 								</tr>

@@ -35,7 +35,7 @@
 			</li>
 			<li role="separator" class="divider"></li>
 			<li>
-				<a href="toManage">管理员端</a>
+				<a href="toManage" th:href="@{/toManage}">管理员端</a>
 			</li>
 			<li>
 				<a href="#">用户须知与服务协议</a>
@@ -60,7 +60,7 @@
                         时间：2020-07-11
                         描述：注册表单
                     -->
-					<form action="userRegister" id="reg_form">
+					<form action="userRegister" method="post">
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="recipient-name" class="control-label">账号(推荐用手机号):</label>
@@ -84,7 +84,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary" id="reg_submitbut">注册</button>
+							<button type="submit" class="btn btn-primary" id="">注册</button>
 						</div>
 
 					</form>
@@ -220,9 +220,9 @@
 				dataType:"json",
 				success:function(msg){
 					if("0" == eval(msg)){
-						alert("该姓名不可用")
+						$("#r_uid").text("账号已存在")
 					}else{
-						alert("该姓名可用")
+						$("#r_uid").text("")
 					}
 				}
 			})

@@ -3,9 +3,11 @@ package com.xrpt.demo.dao;
 import com.xrpt.demo.entity.Order;
 import com.xrpt.demo.vo.OrderInputVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,4 +53,22 @@ public interface OrderDao {
      * @DESC: 更新订单状态
      */
     public int updateOrderState(int state,int oid);
+
+    /*
+     * author:叶芃辉
+     * date:7.16
+     * 增加订单方法*/
+    public int addOrder(Order order);
+
+    public int editPoster(@Param("oid") int oid, @Param("poster") String poster);
+
+    public int editLid(@Param("oid") int oid,@Param("lid") Integer lid);
+
+    int editAddress(@Param("oid") int oid,@Param("address") String address);
+
+    int editPhone(@Param("oid")int oid,@Param("phone") String phone);
+
+    int editDDL(@Param("oid")int oid,@Param("ddl") Date ddl_date);
+
+    int editCode(@Param("oid")int oid,@Param("code") String code);
 }
