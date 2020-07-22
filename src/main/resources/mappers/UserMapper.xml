@@ -137,4 +137,28 @@
     <select id="queryLocations" resultMap="ResultMapLocation">
         select * from tab_location
     </select>
+
+    <resultMap type="com.xrpt.demo.entity.Note" id="ResultMapNote">
+        <id column="t_nid" property="nid" jdbcType="INTEGER" />
+        <result column="t_uid" property="uid" jdbcType="INTEGER" />
+        <result column="t_msg" property="msg" jdbcType="VARCHAR" />
+        <result column="t_date" property="date" jdbcType="TIMESTAMP" />
+        <result column="t_state" property="state" jdbcType="INTEGER" />
+        <result column="t_type" property="type" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!--查询用户的信誉记录-->
+    <select id="creditOrder" resultMap="ResultMapNote">
+        select * from tab_note where t_uid = #{uid} and t_type = 0
+    </select>
+
+    <!--查询用户的催单记录-->
+    <select id="queryNotices" resultMap="ResultMapNote">
+        select * from tab_note where t_uid = #{uid} and t_type = 1
+    </select>
+
+    <!--插入记录-->
+    <insert id="addNote" parameterType="com.xrpt.demo.entity.Note">
+        INSERT INTO tab_note (t_uid,t_date,t_state,t_type,t_msg) VALUES (#{uid},#{date},#{state},#{type},#{msg})
+    </insert>
 </mapper>

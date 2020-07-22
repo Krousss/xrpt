@@ -22,18 +22,15 @@
 			<a href="toIndex"><img src="asserts/img/logo.png" /></a>
 			<div class="dropdown" id="logAndReg_div">
 				<h4 class="btn btn-default btn-lg dropdown-toggle" id="user_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    				欢迎：XXXXXXXXXXXXX
-   				 <span class="caret"></span>
-  				</h4>
+					欢迎：[[${session.currentUser.uname}]]
+					<span class="caret"></span>
+				</h4>
 				<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="user_menu">
 					<li>
 						<a href="toUserCenter">个人中心</a>
 					</li>
 					<li>
-						<a href="toIndex">返回首页</a>
-					</li>
-					<li>
-						<a href="#">退出登录</a>
+						<a href="loginOut">退出登录</a>
 					</li>
 					<li role="separator" class="divider"></li>
 					<li>
@@ -289,7 +286,7 @@
 								<tr class="info">
 									<td>操作：</td>
 									<td>
-										<a href="#">提醒用户付款</a>
+										<a href="#" class="noticeUser" th:value="${order3VO.order.uid}">提醒用户付款</a>
 									</td>
 								</tr>
 							</table>
@@ -407,8 +404,27 @@
 				var oid = $parent.find(".hiddenOid").val();
 				$("#targetOid").attr('value',oid);
 			});
+
 			/*作者：wjx 倒计时方法*/
 			countTime();
+
+			// 提醒用户付款
+			$(".noticeUser").click(function () {
+				var uid=$(this).attr("value");
+				$.ajax({
+					url: "noticeUser",
+					data:{
+						"uid":uid
+					},
+					type: "POST",
+					success:function (result) {
+						alert("已提醒用户付款!");
+					},
+					error:function (e) {
+						console.log(e);
+					}
+				});
+			});
 		});
 
 		/*作者：wjh 设置跳转页面和查询时保持原页面*/

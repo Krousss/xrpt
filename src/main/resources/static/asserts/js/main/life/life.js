@@ -1,4 +1,5 @@
-ctxPath = 'http://127.0.0.1:8080/xrpt/';
+// ctxPath = 'http://127.0.0.1:8080/xrpt/';
+ctxPath = '';
     function showModal(id) {
         $.ajax({
             type:"post",
@@ -29,8 +30,7 @@ ctxPath = 'http://127.0.0.1:8080/xrpt/';
             data:{
                 url:$('#s_url').text(),
                 img:$("#s_imgurl").text(),
-                name:$("#s_name").text(),
-                uid:"12345"
+                name:$("#s_name").text()
             },
             dataType:"text",
             async:true,
@@ -58,9 +58,6 @@ ctxPath = 'http://127.0.0.1:8080/xrpt/';
         $.ajax({
             type:"post",
             url:ctxPath+"myfavorite",
-            data:{
-                id:"12345",
-            },
             dataType:"json",
             async:true,
             success:function (data) {
@@ -85,8 +82,7 @@ ctxPath = 'http://127.0.0.1:8080/xrpt/';
             type:"post",
             url:ctxPath+"deleteFavorite",
             data:{
-                url:$('#s_url').text(),
-                id:"12345"
+                url:$('#s_url').text()
             },
             dataType:"text",
             async:false,

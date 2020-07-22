@@ -2,6 +2,7 @@ package com.xrpt.demo.service;
 
 import com.xrpt.demo.entity.Admin;
 import com.xrpt.demo.entity.Location;
+import com.xrpt.demo.entity.Note;
 import com.xrpt.demo.entity.User;
 
 import java.math.BigDecimal;
@@ -164,5 +165,26 @@ public interface UserService {
      * @Date:不知道
      */
     public List<Location> queryLocations();
+
+    /**
+     * @Author:cjs
+     * @Description:信誉中心的信用记录
+     * @Date:2020/7/21
+     */
+    public List<Note> creditOrder(int uid,int type);
+
+    /**
+     * @Author:cjs
+     * @Description:完成订单添加记录
+     * @Date:2020/7/21
+     */
+    public List<Note> queryNotices(int uid,int type);
+
+    /**
+     * @Author:cjs
+     * @Description:取消订单添加记录
+     * @Date:2020/7/21
+     */
+    public int addNote(Note note);
 
 }

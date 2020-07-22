@@ -7,6 +7,8 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.xrpt.demo.config.AlipayConfig;
+import com.xrpt.demo.entity.Note;
+import com.xrpt.demo.entity.User;
 import com.xrpt.demo.service.impl.OrderServiceImpl;
 import com.xrpt.demo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class AlipayDemoController {
@@ -101,6 +100,13 @@ public class AlipayDemoController {
             int oid = Integer.parseInt(str_oid);
             // 订单状态更新成：已完成
             orderService.updateOrderState(3,oid);
+            // 获取当前用户
+            User currentUser = (User) request.getSession().getAttribute("currentUser");
+            // 信誉分增加记录
+            Note note = new Note(currentUser.getUid(),new Date(),Note.completeMSG,1,0);
+            userService.addNote(note);
+            // 信誉分增加
+            userService.updateUserCredit(1,currentUser.getUid());
             //支付宝交易号
             String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
 

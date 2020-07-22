@@ -3,6 +3,7 @@ package com.xrpt.demo.service.impl;
 import com.xrpt.demo.dao.UserDao;
 import com.xrpt.demo.entity.Admin;
 import com.xrpt.demo.entity.Location;
+import com.xrpt.demo.entity.Note;
 import com.xrpt.demo.entity.User;
 import com.xrpt.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -235,4 +236,20 @@ public class UserServiceImpl implements UserService {
     public List<Location> queryLocations() {
         return userDao.queryLocations();
     }
+
+    @Override
+    public List<Note> creditOrder(int uid, int type) {
+        return userDao.creditOrder(uid,type);
+    }
+
+    @Override
+    public List<Note> queryNotices(int uid, int type) {
+        return userDao.queryNotices(uid,type);
+    }
+
+    @Override
+    public int addNote(Note note) {
+        return userDao.addNote(note);
+    }
+
 }

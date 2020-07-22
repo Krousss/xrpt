@@ -1,5 +1,6 @@
 package com.xrpt.demo.controller;
 
+import com.xrpt.demo.entity.Note;
 import com.xrpt.demo.entity.Order;
 import com.xrpt.demo.entity.User;
 import com.xrpt.demo.service.UserService;
@@ -57,9 +58,13 @@ public class OrderController {
         if(leftMills>0){
             // 增加信誉分
             userService.updateUserCredit(1,currentUser.getUid());
+            Note note = new Note(currentUser.getUid(),new Date(),Note.completeMSG,1,0);
+            userService.addNote(note);
             message = "恭喜!您在规定时间内完成订单!已经奖励信誉分咯!";
         }else{
             userService.updateUserCredit(-1,currentUser.getUid());
+            Note note = new Note(currentUser.getUid(),new Date(),Note.lateOrdMSG,0,0);
+            userService.addNote(note);
             message = "您未在规定时间内完成订单!已扣除相应信誉分!还请诚信交易";
         }
         // 价格转化成bigdecimal
@@ -91,6 +96,15 @@ public class OrderController {
         if(i!=0){
             // 扣除信誉分
             userService.updateUserCredit(-1,currentUser.getUid());
+            // 信誉分变动通知
+            Note note = new Note(currentUser.getUid(),new Date(),Note.cancelMSG,0,0);
+            userService.addNote(note);
+            // 通知用户订单被取消
+                // 获取用户id
+                Order order = orderService.queryOneOrderByOid(oid);
+                int uid = order.getUid();
+            Note note2 = new Note(uid,new Date(),Note.cancelOrdMSG,0,1);
+            userService.addNote(note2);
             out.write("<script>alert('取消成功!您的信誉分将被减少!');location.href='toTakerCenter'</script>");
         }else {
             out.write("<script>alert('提交失败')</script>");
@@ -119,6 +133,9 @@ public class OrderController {
             }else{
                 // 扣除信誉分
                 userService.updateUserCredit(-1,currentUser.getUid());
+                // 信誉分变动通知
+                Note note = new Note(currentUser.getUid(),new Date(),Note.cancelMSG,0,0);
+                userService.addNote(note);
                 out.write("<script>alert('取消成功!已有人接单，您的信誉分将被减少!');location.href='toPosterCenter'</script>");
             }
         }else {

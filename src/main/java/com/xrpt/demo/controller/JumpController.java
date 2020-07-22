@@ -3,6 +3,7 @@ package com.xrpt.demo.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xrpt.demo.entity.Location;
+import com.xrpt.demo.entity.Note;
 import com.xrpt.demo.entity.Order;
 import com.xrpt.demo.entity.User;
 import com.xrpt.demo.service.impl.OrderServiceImpl;
@@ -202,8 +203,19 @@ public class JumpController {
     }
 
     @RequestMapping("/toUserCenter")
-    public String toUserCenter(){
-        return "User/UserCenter";
+    public ModelAndView toUserCenter(HttpSession session){
+        User currentUser = (User) session.getAttribute("currentUser");
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.queryUserByID(currentUser.getUid());
+        List<Note> creditNotes = userService.creditOrder(currentUser.getUid(),0);
+        List<Note> noticeNotes = userService.queryNotices(currentUser.getUid(),1);
+
+        modelAndView.addObject("creditNotes",creditNotes);
+        modelAndView.addObject("noticeNotes",noticeNotes);
+        modelAndView.addObject("currentCredit",user.getCredit());
+        modelAndView.setViewName("User/UserCenter");
+
+        return modelAndView;
     }
 
     @RequestMapping("/toTakerDetail")

@@ -3,6 +3,7 @@ package com.xrpt.demo.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xrpt.demo.entity.Admin;
+import com.xrpt.demo.entity.Note;
 import com.xrpt.demo.entity.User;
 import com.xrpt.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -250,18 +252,12 @@ public class UserController {
      * @Description:管理员页面通过最大值最小值查询用户
      * @Date:2020/7/19
      */
-    @RequestMapping("searchValue")
-    public ModelAndView searchValue(@RequestParam("credit1")int credit1,@RequestParam("credit2")int credit2,@RequestParam(required = true,defaultValue = "1")int page){
-        System.out.println("管理员页面通过最大值最小值查询用户");
-        PageHelper.startPage(page, 5);
-        System.out.println(credit1+"---------"+credit2);
-        List<User> users = userService.searchValue(credit1,credit2);
-        System.out.println("----"+users);
-        ModelAndView modelAndView = new ModelAndView();
-        PageInfo<User> pageInfo = new PageInfo<>(users);
-        modelAndView.addObject("page",pageInfo);
-        modelAndView.addObject("users",users);
-        modelAndView.setViewName("Admin/admin");
-        return modelAndView;
+    @RequestMapping("/noticeUser")
+    @ResponseBody
+    public String noticeUser(Integer uid){
+        // 获取当前用户
+        Note note = new Note(uid,new Date(),Note.payOrdMSG,0,1);
+        userService.addNote(note);
+        return "success";
     }
 }

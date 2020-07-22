@@ -27,7 +27,7 @@
 		</h4>
 		<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="user_menu">
 			<li>
-				<a href="toIndex">返回首页</a>
+				<a href="toUserCenter">个人中心</a>
 			</li>
 			<li>
 				<a href="loginOut">退出登录</a>
@@ -55,7 +55,9 @@
 			<li role="presentation">
 				<a href="#credit" aria-controls="credit" role="tab" data-toggle="tab">信誉中心</a>
 			</li>
-
+			<li role="presentation">
+				<a href="#payNotice" aria-controls="payNotice" role="tab" data-toggle="tab">通知中心</a>
+			</li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -153,26 +155,37 @@
             -->
 			<div role="tabpanel" class="tab-pane" id="credit">
 				<hr />
-				<h2>当前个人信誉积分：<span id="score">[[${session.currentUser.credit}]]</span></h2>
+				<h2>当前个人信誉积分：<span id="score">[[${currentCredit}]]</span></h2>
 				<hr />
 				<div class="hotcontent advice">
 					<span class="produce">积分增减明细：</span><br />
-					<marquee id="affiche" align="left" behavior="scroll" direction="up" height="400px" width="600px" hspace="50" vspace="20" loop="-1" scrollamount="3" scrolldelay="100" onMouseout="this.start()" onMouseover="this.stop()">
-								<span id="score_add">
-					2020-06-11 18:00 完成订单一笔，积分+1
-				</span><br />
-						<span id="score_add">
-					2020-06-12 18:00 完成订单一笔，积分+1
-				</span><br />
-						<span id="score_add">
-					2020-06-13 18:00 完成订单一笔，积分+1
-				</span><br />
-						<span id="score_sub">
-					2020-06-13 22:00 强行取消订单，积分-5
-				</span><br />
+					<marquee id="affiche" align="left" behavior="scroll" direction="up" height="400px" width="600px"
+							 hspace="50" vspace="20" loop="-1" scrollamount="3" scrolldelay="100"
+							 onMouseout="this.start()" onMouseover="this.stop()">
+						<div th:each="note1:${creditNotes}">
+							<span id="score_add" th:if="${note1.state} == 1" th:text="${#dates.format(note1.date, 'yyyy-MM-dd HH:mm:ss')}+'  '+${note1.msg}"></span>
+							<span id="score_sub" th:if="${note1.state} == 0" th:text="${#dates.format(note1.date, 'yyyy-MM-dd HH:mm:ss')}+'  '+${note1.msg}"></span>
+						</div>
 					</marquee>
 				</div>
 
+			</div>
+			<!--
+                作者：wjx
+                时间：2020-07-22
+                描述：第三页
+            -->
+			<div role="tabpanel" class="tab-pane" id="payNotice">
+				<div class="hotcontent advice">
+					<span class="produce">您收到的通知：</span><br />
+					<marquee id="affiche" align="left" behavior="scroll" direction="up" height="400px" width="600px"
+							 hspace="50" vspace="20" loop="-1" scrollamount="3" scrolldelay="100"
+							 onMouseout="this.start()" onMouseover="this.stop()">
+						<div th:each="note2:${noticeNotes}">
+							<span id="score_sub" th:text="${#dates.format(note2.date, 'yyyy-MM-dd HH:mm:ss')}+'  '+${note2.msg}"></span>
+						</div>
+					</marquee>
+				</div>
 			</div>
 		</div>
 	</div>
