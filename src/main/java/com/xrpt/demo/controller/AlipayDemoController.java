@@ -31,7 +31,8 @@ public class AlipayDemoController {
     @Autowired
     private UserServiceImpl userService;
 
-    private final BigDecimal profitPerCent = new BigDecimal("0.1");
+    private final BigDecimal adminProfitPerCent = new BigDecimal("0.1");
+    private final BigDecimal userProfitPerCent = new BigDecimal("0.9");
 
     @RequestMapping("/goAlipay")
     @ResponseBody
@@ -79,6 +80,14 @@ public class AlipayDemoController {
         return result;
     }
 
+    /**
+     * 支付后的处理方法
+     * @param request
+     * @param response
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws AlipayApiException
+     */
     @RequestMapping("/returnUrl")
     public String returnUrl(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
         response.setContentType("text/html;charset=utf-8");
@@ -90,26 +99,29 @@ public class AlipayDemoController {
             String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
             // 订单金额
             String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
-            // 转成int
+            // 获取当前用户
+            User currentUser = (User) request.getSession().getAttribute("currentUser");
+            // 用户支付的金额转成int
             double profit = Double.parseDouble(total_amount);
-            // 更新公司利润，profit的BigDecimal乘以利润占比
-            userService.updateAdminProfit(new BigDecimal(profit).multiply(profitPerCent));
-            // 去掉前5位UUID
+            // 1、更新公司利润，profit的BigDecimal乘以利润占比
+            BigDecimal adminProfit = new BigDecimal(profit).multiply(adminProfitPerCent);
+            userService.updateAdminProfit(adminProfit);
+            // 2、更新用户收益
+            BigDecimal userProfit = new BigDecimal(profit).multiply(userProfitPerCent);
+            userService.updateUserProfit(userProfit,currentUser.getUid());
+            // 订单ID去掉前5位UUID（因为在这之前的步骤做了UUID临时拼接）
             String str_oid = out_trade_no.substring(5,9);
             // 转成int
             int oid = Integer.parseInt(str_oid);
-            // 订单状态更新成：已完成
+            // 3、订单状态更新成：已完成
             orderService.updateOrderState(3,oid);
-            // 获取当前用户
-            User currentUser = (User) request.getSession().getAttribute("currentUser");
-            // 信誉分增加记录
+            // 4、用户的信誉分 增加 记录
             Note note = new Note(currentUser.getUid(),new Date(),Note.completeMSG,1,0);
             userService.addNote(note);
-            // 信誉分增加
+            // 5、信誉分增加
             userService.updateUserCredit(1,currentUser.getUid());
             //支付宝交易号
             String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
-
 //            String ids = (String) request.getSession().getAttribute("ids");
 //            if(!StringUtils.isEmpty(ids)){
 //                String[] split = ids.split(",");

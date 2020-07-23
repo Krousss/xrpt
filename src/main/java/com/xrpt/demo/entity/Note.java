@@ -10,14 +10,15 @@ import java.util.Date;
  */
 public class Note {
     private int nid;
-    private int uid;//用户id
+    private int uid;//所体现的用户id
     private Date date;//记录时间
     private String msg;//通知内容
     private int state;//0:减积分类型；1：加积分类型
     private int type;//0:积分通知；1:催单通知
+    private int oid;//所提醒的订单编号
 
     public static final String cancelMSG = "您违规取消订单，积分-1";
-    public static final String completeMSG = "您按时完成了订单，积分+1";
+    public static final String completeMSG = "您按时完成或支付了订单，积分+1";
     public static final String lateOrdMSG = "您未在规定时间内完成订单，积分-1";
     public static final String payOrdMSG = "您有待付款订单催促，请及时支付款项";
     public static final String cancelOrdMSG = "您的订单被接单人取消，正在等待新的接单人";
@@ -43,6 +44,14 @@ public class Note {
         sb.append(", type=").append(type);
         sb.append('}');
         return sb.toString();
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
     }
 
     public String getMsg() {

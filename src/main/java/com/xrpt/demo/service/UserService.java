@@ -187,4 +187,11 @@ public interface UserService {
      */
     public int addNote(Note note);
 
+    /**
+     * @Author: wjx
+     * @Description: 更新用户收益
+     * @Date: 2020/7/22
+     */
+    public int updateUserProfit(BigDecimal money,int uid);
+
 }

@@ -11,6 +11,7 @@
         <result column="t_credit" property="credit" jdbcType="INTEGER" />
         <result column="t_state" property="state" jdbcType="INTEGER" />
         <result column="t_real" property="real" jdbcType="VARCHAR" />
+        <result column="t_profit" property="profit" jdbcType="DECIMAL" />
     </resultMap>
 
     <resultMap type="com.xrpt.demo.entity.Location" id="ResultMapLocation">
@@ -145,6 +146,7 @@
         <result column="t_date" property="date" jdbcType="TIMESTAMP" />
         <result column="t_state" property="state" jdbcType="INTEGER" />
         <result column="t_type" property="type" jdbcType="INTEGER" />
+        <result column="t_oid" property="oid" jdbcType="INTEGER" />
     </resultMap>
 
     <!--查询用户的信誉记录-->
@@ -159,6 +161,11 @@
 
     <!--插入记录-->
     <insert id="addNote" parameterType="com.xrpt.demo.entity.Note">
-        INSERT INTO tab_note (t_uid,t_date,t_state,t_type,t_msg) VALUES (#{uid},#{date},#{state},#{type},#{msg})
+        INSERT INTO tab_note (t_uid,t_date,t_state,t_type,t_msg,t_oid) VALUES (#{uid},#{date},#{state},#{type},#{msg},#{oid})
     </insert>
+
+    <!--更新用户利润-->
+    <update id="updateUserProfit">
+        update tab_user set t_profit = t_profit + #{money} where t_uid = #{uid}
+    </update>
 </mapper>

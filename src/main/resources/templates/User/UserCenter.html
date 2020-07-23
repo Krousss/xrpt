@@ -69,6 +69,8 @@
             -->
 			<div role="tabpanel" class="tab-pane active" id="info">
 				<hr />
+					<h2>我的收益：<span id="score">[[${currentProfit}]]元</span></h2>
+				<hr />
 				<div id="info_tab">
 					<table class="table">
 						<!-- On rows -->
@@ -155,7 +157,7 @@
             -->
 			<div role="tabpanel" class="tab-pane" id="credit">
 				<hr />
-				<h2>当前个人信誉积分：<span id="score">[[${currentCredit}]]</span></h2>
+					<h2>当前个人信誉积分：<span id="score">[[${currentCredit}]]</span></h2>
 				<hr />
 				<div class="hotcontent advice">
 					<span class="produce">积分增减明细：</span><br />
@@ -182,7 +184,8 @@
 							 hspace="50" vspace="20" loop="-1" scrollamount="3" scrolldelay="100"
 							 onMouseout="this.start()" onMouseover="this.stop()">
 						<div th:each="note2:${noticeNotes}">
-							<span id="score_sub" th:text="${#dates.format(note2.date, 'yyyy-MM-dd HH:mm:ss')}+'  '+${note2.msg}"></span>
+							<span id="score_sub" th:text="${#dates.format(note2.date, 'yyyy-MM-dd HH:mm:ss')}+' '+${note2.msg}+' '"></span>
+							<a th:href="@{toOrderDetail(orderId=${note2.oid})}">点击跳转至相应订单</a>
 						</div>
 					</marquee>
 				</div>

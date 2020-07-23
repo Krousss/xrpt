@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xrpt.demo.dao.LocationDao">
+    <resultMap type="com.xrpt.demo.entity.Location" id="ResultMapLocation">
+        <result column="t_lid" property="lid" jdbcType="INTEGER" />
+        <result column="t_content" property="content" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--查询  -->
+    <select id="queryLocation" parameterType="com.xrpt.demo.entity.Location" resultMap="ResultMapLocation">
+        SELECT * FROM tab_location
+    </select>
+
+    <select id="queryOneLocation" parameterType="com.xrpt.demo.entity.Location" resultMap="ResultMapLocation">
+        SELECT * FROM tab_location where t_content = #{content}
+    </select>
+</mapper>

@@ -252,4 +252,9 @@ public class UserServiceImpl implements UserService {
         return userDao.addNote(note);
     }
 
+    @Override
+    public int updateUserProfit(BigDecimal money, int uid) {
+        return userDao.updateUserProfit(money,uid);
+    }
+
 }

@@ -52,7 +52,7 @@
 					<td>订单编号</td>
 					<td id="oid" th:text="${targetOrder.order.oid}"></td>
 					<td>
-<!--						<a href="" th:href="@{'/userCancle?oid='+${targetOrder.order.oid}}">取消订单</a>-->
+						<a th:if="${targetOrder.order.state == 2}" th:href="@{/goAlipay(price=${targetOrder.order.price},oid=${targetOrder.order.oid})}">去付款</a>
 					</td>
 
 				</tr>

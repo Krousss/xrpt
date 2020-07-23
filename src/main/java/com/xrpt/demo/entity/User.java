@@ -1,6 +1,7 @@
 package com.xrpt.demo.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @Author:cjs
@@ -16,6 +17,7 @@ public class User implements Serializable {
     private int credit;//信用分
     private int state;//状态：0冻结、1正常
     private String real; //真实姓名
+    private BigDecimal profit; //用户受益
 
     public User(Integer uid) {
         this.uid = uid;
@@ -36,6 +38,14 @@ public class User implements Serializable {
         sb.append(", real='").append(real).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    public BigDecimal getProfit() {
+        return profit;
+    }
+
+    public void setProfit(BigDecimal profit) {
+        this.profit = profit;
     }
 
     public Integer getUid() {

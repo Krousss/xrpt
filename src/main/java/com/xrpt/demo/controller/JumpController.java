@@ -6,6 +6,7 @@ import com.xrpt.demo.entity.Location;
 import com.xrpt.demo.entity.Note;
 import com.xrpt.demo.entity.Order;
 import com.xrpt.demo.entity.User;
+import com.xrpt.demo.service.impl.LocationServiceImpl;
 import com.xrpt.demo.service.impl.OrderServiceImpl;
 import com.xrpt.demo.service.impl.UserServiceImpl;
 import com.xrpt.demo.vo.OrderInputVo;
@@ -35,7 +36,8 @@ public class JumpController {
     @Autowired
     private UserServiceImpl userService;
 
-
+    @Autowired
+    private LocationServiceImpl locationService;
 
     /**
      * @author by wjx
@@ -46,10 +48,14 @@ public class JumpController {
     @RequestMapping("/toTakerCenter")
     public ModelAndView toTakerCenter(HttpSession session, @RequestParam(required = true,defaultValue = "1") Integer page, Integer to,OrderInputVo orderInputVo){
         User currentUser = (User) session.getAttribute("currentUser");
-        ModelAndView model = new ModelAndView();
         orderInputVo.setTakerId(currentUser.getUid());//设置登陆人的uid
+
+        ModelAndView model = new ModelAndView();
+
+        List<Location> locations = locationService.queryLocation();//获取驿站位置
+
         // 待接受订单
-//        List<Order> orders1 = orderService.queryTakerOrderByState(0);
+        List<Order> orders1 = orderService.queryTakerOrderByState(orderInputVo);
         // 已接受订单
         orderInputVo.setState(1);
         List<Order> orders2 = orderService.queryTakerOrderByState(orderInputVo);
@@ -80,6 +86,7 @@ public class JumpController {
         orderInputVo.setState(3);
         List<Order> orders4 = orderService.queryTakerOrderByState(orderInputVo);
 
+        List<OrderOutVO> orders1VO = getOrdersVO(orders1);
         List<OrderOutVO> orders2VO = getOrdersVO(orders2);
         List<OrderOutVO> orders3VO = getOrdersVO(orders3);
         List<OrderOutVO> orders4VO = getOrdersVO(orders4);
@@ -87,6 +94,8 @@ public class JumpController {
         PageInfo<Order> pageInfo = new PageInfo<>(orders4);
         if (to !=null){ model.addObject("goto",1);}
         model.addObject("page",pageInfo);
+        model.addObject("locations",locations);
+        model.addObject("orders1VO",orders1VO);
         model.addObject("orders2VO",orders2VO);
         model.addObject("orders3VO",orders3VO);
         model.addObject("orders4VO",orders4VO);
@@ -213,6 +222,7 @@ public class JumpController {
         modelAndView.addObject("creditNotes",creditNotes);
         modelAndView.addObject("noticeNotes",noticeNotes);
         modelAndView.addObject("currentCredit",user.getCredit());
+        modelAndView.addObject("currentProfit",user.getProfit().toString());
         modelAndView.setViewName("User/UserCenter");
 
         return modelAndView;
@@ -244,7 +254,6 @@ public class JumpController {
         List<User> users = userService.queryAllUser();
 
         PageInfo<User> pageInfo = new PageInfo<>(users);
-        System.out.println(pageInfo+"------~~~~~~~~~~~~");
         modelAndView.addObject("users",users);
         modelAndView.addObject("page",pageInfo);
         modelAndView.setViewName("Admin/admin");

@@ -254,9 +254,10 @@ public class UserController {
      */
     @RequestMapping("/noticeUser")
     @ResponseBody
-    public String noticeUser(Integer uid){
+    public String noticeUser(Integer uid,Integer oid){
         // 获取当前用户
         Note note = new Note(uid,new Date(),Note.payOrdMSG,0,1);
+        note.setOid(oid);
         userService.addNote(note);
         return "success";
     }
