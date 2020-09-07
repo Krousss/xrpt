@@ -48,15 +48,23 @@ public class JumpController {
     @RequestMapping("/toTakerCenter")
     public ModelAndView toTakerCenter(HttpSession session, @RequestParam(required = true,defaultValue = "1") Integer page, Integer to,OrderInputVo orderInputVo){
         User currentUser = (User) session.getAttribute("currentUser");
-        orderInputVo.setTakerId(currentUser.getUid());//设置登陆人的uid
 
         ModelAndView model = new ModelAndView();
 
         List<Location> locations = locationService.queryLocation();//获取驿站位置
 
         // 待接受订单
+        orderInputVo.setState(0);
+
+        if(orderInputVo.getLocation()!=null) {
+            orderInputVo.setLid(locationService.queryOneLocation(orderInputVo.getLocation()).getLid());
+        }
+
         List<Order> orders1 = orderService.queryTakerOrderByState(orderInputVo);
+
         // 已接受订单
+        //设置登陆人的uid
+        orderInputVo.setTakerId(currentUser.getUid());
         orderInputVo.setState(1);
         List<Order> orders2 = orderService.queryTakerOrderByState(orderInputVo);
         // 待付款订单
@@ -92,7 +100,13 @@ public class JumpController {
         List<OrderOutVO> orders4VO = getOrdersVO(orders4);
 
         PageInfo<Order> pageInfo = new PageInfo<>(orders4);
-        if (to !=null){ model.addObject("goto",1);}
+        if (to !=null){
+            if(to == 2){
+                model.addObject("goto",2);
+            }else{
+                model.addObject("goto",1);
+            }
+        }
         model.addObject("page",pageInfo);
         model.addObject("locations",locations);
         model.addObject("orders1VO",orders1VO);
@@ -228,11 +242,6 @@ public class JumpController {
         return modelAndView;
     }
 
-    @RequestMapping("/toTakerDetail")
-    public String toTakerDetail(){
-        return "Taker/takerDetail";
-    }
-
     @RequestMapping("/toIndex")
     public String toIndex(){
         return "index";
@@ -281,6 +290,23 @@ public class JumpController {
         modelAndView.addObject("targetOrder",orderOutVO);
         modelAndView.addObject("locations",locations);
         modelAndView.setViewName("Poster/orderDetail");
+        return modelAndView;
+    }
+
+
+    @RequestMapping("/toTakerDetail")
+    public ModelAndView toTakerDetail(int oid){
+        Order order=orderService.queryOneOrderByOid(oid);
+
+        OrderOutVO orderOutVO = new OrderOutVO();
+        orderOutVO.setOrder(order);
+
+        Location location = userService.queryOneLocation(order.getLid());
+        orderOutVO.setLocation(location);
+
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("targetOrder",orderOutVO);
+        modelAndView.setViewName("Taker/takerDetail");
         return modelAndView;
     }
 }

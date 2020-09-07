@@ -54,6 +54,13 @@ public interface OrderDao {
      */
     public int updateOrderState(int state,int oid);
 
+    /**
+     * @author by wjx
+     * @date 2020/7/23
+     * @DESC: 更新订单状态
+     */
+    public int acceptOrder(int takerId,int oid);
+
     /*
      * author:叶芃辉
      * date:7.16

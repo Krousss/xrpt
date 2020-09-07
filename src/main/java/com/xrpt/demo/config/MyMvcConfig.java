@@ -1,12 +1,11 @@
 package com.xrpt.demo.config;
 
+import com.xrpt.demo.interceptor.LoginHandlerIntercepter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -39,14 +38,15 @@ public class MyMvcConfig implements WebMvcConfigurer {
         converters.add(responseBodyConverter());
     }
 
-    //    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoginHandlerIntercepter()).addPathPatterns("/**")
-//                .excludePathPatterns("/","/login.html","/login");
-//    }
+    //登录拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginHandlerIntercepter()).addPathPatterns("/toPosterCenter","/toTakerCenter","/lifeCenter")
+                .excludePathPatterns("/","/index.html","/index");
+    }
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-//    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+    }
 }

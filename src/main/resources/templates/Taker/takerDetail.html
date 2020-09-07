@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
@@ -50,34 +50,34 @@
 						<!-- On rows -->
 						<tr class="active">
 							<td>订单编号</td>
-							<td>123456</td>
+							<td>[[${targetOrder.order.oid}]]</td>
 						</tr>
 						<tr class="success">
 							<td>收货人</td>
-							<td>真步</td>
+							<td>[[${targetOrder.order.poster}]]</td>
 						</tr>
 						<tr class="warning">
 							<td>驿站位置</td>
-							<td>食堂对面菜鸟驿站</td>
+							<td>[[${targetOrder.location.content}]]</td>
 						</tr>
 						<tr class="danger">
 							<td>交货地址</td>
-							<td>E1-427</td>
+							<td>[[${targetOrder.order.address}]]</td>
 						</tr>
 						<tr class="info">
 							<td>联系电话</td>
-							<td>12345678910</td>
+							<td>[[${targetOrder.order.phone}]]</td>
 						</tr>
 						<tr class="active">
 							<td>最晚送达时间</td>
-							<td>2020-06-12 18:00:00</td>					
+							<td th:text="${#dates.format(targetOrder.order.ddl, 'yyyy-MM-dd HH:mm:ss')}">2020-06-12 18:00:00</td>
 						</tr>
 						<tr class="danger">
 							<td>操作</td>
-							<td><a>接受订单</a></td>		
+							<td><a th:href="@{'/acceptOrder?oid='+${targetOrder.order.oid}}">接受订单</a></td>
 						</tr>
 					</table>
-			
+
 				</div>
 			</div>
 	</body>

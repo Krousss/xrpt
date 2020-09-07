@@ -81,7 +81,8 @@
 					<td class="active" th:text="${user.phone}">12345678910</td>
 					<td class="success" th:text="${user.uname}">真步</td>
 					<td class="warning" th:text="${user.credit}">95</td>
-					<td class="active" th:text="${user.state}">12345678910</td>
+					<td class="active" th:if="${user.state == 1}" th:text="正常">1</td>
+					<td class="active" th:if="${user.state == 0}" th:text="冻结">0</td>
 					<td class="danger"><a th:href="@{/updState/}+${user.uid}">冻结</a>&emsp;&emsp;/&emsp;&emsp;<a th:href="@{/updRecover/}+${user.uid}">恢复</a></td>
 				</tr>
 			</table>

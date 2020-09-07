@@ -21,7 +21,7 @@
       include: druid
     datasource:
       driver-class-name: com.mysql.jdbc.Driver
-      password: 123
+      password: 123456
       username: root
       url: jdbc:mysql://localhost:3306/xrpt?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false
       type: com.alibaba.druid.pool.DruidDataSource

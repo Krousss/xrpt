@@ -275,4 +275,25 @@ public class OrderController {
         ret.put("order",null);
         return ret;
     }
+
+    /**
+     * @author by wjx
+     * @date 2020/7/23
+     * @DESC: taker接受订单
+     */
+    @RequestMapping("/acceptOrder")
+    public void acceptOrder(Integer oid,HttpSession session, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = response.getWriter();
+
+        // 获取当前用户
+        User currentUser = (User) session.getAttribute("currentUser");
+        int i = orderService.acceptOrder(currentUser.getUid(), oid);
+        if(i!=0){
+            out.write("<script>alert('接单成功!请按时完成订单!');location.href='toTakerCenter'</script>");
+        }else {
+            out.write("<script>alert('接单失败')</script>");
+        }
+    }
 }

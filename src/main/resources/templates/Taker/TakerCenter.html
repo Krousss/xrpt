@@ -116,7 +116,7 @@
 						</div>
 						<hr />
 						<div th:each="order1VO:${orders1VO}" class="your_table">
-							<a href="toTakerDetail">
+							<a th:href="@{'/toTakerDetail?oid='+${order1VO.order.oid}}">
 								<table border="0px" cellspacing="" cellpadding="" class="table">
 									<!-- On rows -->
 									<tr>
@@ -404,12 +404,17 @@
 
 		/*作者：wjh 设置跳转页面和查询时保持原页面*/
 		window.onload = function(){
-			var goto = $("#goto").text()
+			var goto = $("#goto").text();
 			if (goto == 1){
 				$("#finished").addClass("active");
 				$("#finishedd").addClass("active");
 				$("#waiting").removeClass("active");
 				$("#waitingg").removeClass("active");
+			}else if (goto == 2){
+				$("#waiting").addClass("active");
+				$("#waitingg").addClass("active");
+				$("#finished").removeClass("active");
+				$("#finishedd").removeClass("active");
 			}
 
 		};

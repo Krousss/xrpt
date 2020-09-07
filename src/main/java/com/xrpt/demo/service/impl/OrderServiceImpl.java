@@ -48,6 +48,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public int acceptOrder(int takerId, int oid) {
+        return orderDao.acceptOrder(takerId,oid);
+    }
+
+    @Override
     public int addOrder(Order order) {
         return orderDao.addOrder(order);
     }

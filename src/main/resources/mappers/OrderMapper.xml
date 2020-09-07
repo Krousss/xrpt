@@ -18,13 +18,22 @@
     </resultMap>
 
     <select id="queryTakerOrderByState" resultMap="ResultMapOrder" parameterType="Integer">
-        select * from tab_order where t_state = #{state} and t_taker = #{takerId}
-            <if test="poster!=null and poster!=''">
-                and  t_poster like '%${poster}%'
-            </if>
-            <if test="minTime!=null and minTime!='' and maxTime!=null and maxTime!=''">
-                <![CDATA[ and  t_date > #{minTime}  and  t_date <  #{maxTime}]]>
-            </if>
+        select * from tab_order where t_state = #{state}
+        <if test="takerId!=null and takerId!=0">
+            and t_taker = #{takerId}
+        </if>
+        <if test="poster!=null and poster!=''">
+            and  t_poster like '%${poster}%'
+        </if>
+        <if test="minTime!=null and minTime!='' and maxTime!=null and maxTime!=''">
+            <![CDATA[ and  t_date > #{minTime}  and  t_date <  #{maxTime}]]>
+        </if>
+        <if test="lid!=null and lid!=''">
+            and  t_lid like '%${lid}%'
+        </if>
+        <if test="address!=null and address!=''">
+            and  t_address like '%${address}%'
+        </if>
     </select>
 
 
@@ -44,6 +53,10 @@
 
     <update id="commitOrder">
         update tab_order set t_price = #{price},t_state = 2,t_date = now() where t_oid = #{oid}
+    </update>
+
+    <update id="acceptOrder">
+        update tab_order set t_taker = #{takerId},t_state = 1 where t_oid = #{oid}
     </update>
 
     <update id="updateOrderState">
